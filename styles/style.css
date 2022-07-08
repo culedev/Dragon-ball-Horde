@@ -1,0 +1,17 @@
+body {
+    margin: 0;
+    background-color: black;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 50px;
+}
+
+#canvas {
+    background-color: lightgray;
+}
+
