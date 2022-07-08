@@ -2,8 +2,8 @@ class Goku {
   constructor(src) {
     this.x = 400;
     this.y = 480;
-    this.w = 30;
-    this.h = 30;
+    this.w = 50;
+    this.h = 50;
     this.vx = 0;
     this.vy = 0;
     this.hp = 3;
@@ -12,8 +12,9 @@ class Goku {
   }
 
   drawGoku = () => {
-    ctx.fillStyle = "red";
-    ctx.fillRect(this.x, this.y, this.w, this.h);
+    // ctx.fillStyle = "red";
+    // ctx.fillRect(this.x, this.y, this.w, this.h);
+    ctx.drawImage(this.image, this.x, this.y);
   };
 
   updatePlayer = () => {
@@ -33,6 +34,8 @@ class Goku {
     }
   };
 }
+
+
 
 class GokuProjectile {
     constructor(vx,vy) {

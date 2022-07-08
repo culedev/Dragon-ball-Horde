@@ -6,6 +6,8 @@ const ctx = canvas.getContext("2d");
 
 // GLOBAL VARIABLES
 let game;
+let deltaX;
+let deltaY;
 
 const startScreen = document.querySelector("#start-screen");
 const startBtn = document.querySelector("#start-btn");
@@ -56,13 +58,29 @@ window.addEventListener("keyup", ({ keyCode }) => {
       break;
   }
 });
+
 canvas.addEventListener("click", ({offsetX, offsetY}) => {
-  let deltaX = offsetX - (game.goku.x);
-  let deltaY = offsetY - (game.goku.y);
-  let rotation = Math.atan2(deltaX, deltaY);
-  ProjectileVx = Math.sin(rotation) * 2.5;
-  ProjectileVy = Math.cos(rotation) * 2.5;
-  console.log(ProjectileVx, ProjectileVy)
-  game.gokuProjectile = [new GokuProjectile(ProjectileVx,ProjectileVy)]
+  deltaX = offsetX - (game.goku.x);
+  deltaY = offsetY - (game.goku.y);
+  console.log(event)
+  let rotation = Math.atan2(deltaX, deltaY, type);
+
+  let ProjectileVx = Math.sin(rotation) * 4;
+  let ProjectileVy = Math.cos(rotation) * 4; 
+  let newProjectile = new GokuProjectile(ProjectileVx,ProjectileVy);
+
+  game.gokuProjectile.push(newProjectile)
+}
+)
+
+canvas.addEventListener("mousemove", ({offsetX}) => {
+  let gokuX = game.goku.x;
+ 
+  if (offsetX > gokuX) {
+    game.goku.image.src = "../images/gokuright.png"
+  } else {
+    game.goku.image.src = "../images/gokuleft.png"
+  }
+  
 }
 )

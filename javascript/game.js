@@ -15,7 +15,8 @@ class Game {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     //* 2. MOVIMIENTO Y ACCIONES
-
+    this.removeProjectile();
+    
     // * 3. DIBUJAR ELEMENTOS
     ctx.drawImage(this.bg, 0, 0, canvas.width, canvas.height);
     this.goku.updatePlayer();
@@ -29,4 +30,12 @@ class Game {
       requestAnimationFrame(this.gameLoop);
     }
   };
+  
+  removeProjectile = () => {
+    if (this.gokuProjectile.length > 20) { 
+      this.gokuProjectile.shift()
+    }
+
+  }
+  
 }
