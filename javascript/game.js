@@ -21,6 +21,8 @@ class Game {
     this.addNewEnemiesRight();
     this.removeEnemyArr();
     this.removeEnemyArr2();
+    this.projectileCollisionEnemy()
+    
 
     // * 3. DIBUJAR ELEMENTOS
     ctx.drawImage(this.bg, 0, 0, canvas.width, canvas.height);
@@ -81,7 +83,25 @@ class Game {
     if (this.enemyArr2.length < 3  || this.enemyArr2[this.enemyArr2.length - 3].x < canvas.width * 0.7) {
       this.enemyArr2.push(newEnemieRight)
     }
-    
   }
-  
+
+  projectileCollisionEnemy = () => {
+    this.gokuProjectile.forEach((projectile, i) => {
+      
+      this.enemyArr.forEach((enemy, j) => {
+        
+        if (
+          enemy.x < projectile.x + projectile.w &&
+          enemy.x + enemy.w > projectile.x &&
+          enemy.y < projectile.y + projectile.h &&
+          enemy.h + enemy.y > projectile.y
+        ) {
+          console.log("Le has dado!")
+          this.gokuProjectile.splice(i,1)
+          this.enemyArr.splice(j,1)
+        }
+      })
+    })
 }
+}
+

@@ -44,6 +44,8 @@ class GokuProjectile {
         this.y = game.goku.y + game.goku.h/2;
         this.vx = vx;
         this.vy = vy;
+        this.w = 30;
+        this.h = 30;
         // this.radius = 10;
         this.image = new Image()
         this.image.src = "./images/gokuattack1.png"
