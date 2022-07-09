@@ -15,7 +15,7 @@ class Game {
   gameLoop = () => {
     //* 1. Limpiamos el CANVAS
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    console.log(this.particles.length)
+    console.log(this.particles.length);
     //* 2. MOVIMIENTO Y ACCIONES
     this.removeProjectile();
     this.addNewEnemiesLeft();
@@ -47,7 +47,7 @@ class Game {
     // forEach particles
     this.particles.forEach((particle, i) => {
       if (particle.opacity <= 0) {
-        this.particles.splice(i,1)
+        this.particles.splice(i, 1);
       }
       particle.updateParticle();
     });
@@ -118,9 +118,9 @@ class Game {
               new Particle(
                 enemy.x + enemy.w / 2,
                 enemy.y + enemy.h / 2,
-                (Math.random() - 0.5)*2,
-                (Math.random() - 0.5)*2,
-                Math.random() *3,
+                (Math.random() - 0.5) * 2,
+                (Math.random() - 0.5) * 2,
+                Math.random() * 3.5,
                 "#730797"
               )
             );
@@ -146,9 +146,9 @@ class Game {
               new Particle(
                 enemy.x + enemy.w / 2,
                 enemy.y + enemy.h / 2,
-                (Math.random() - 0.5)*2,
-                (Math.random() - 0.5)*2,
-                Math.random() *3,
+                (Math.random() - 0.5) * 2,
+                (Math.random() - 0.5) * 2,
+                Math.random() * 3.5,
                 "#730797"
               )
             );
@@ -168,9 +168,20 @@ class Game {
         enemy.y < this.goku.y + this.goku.h &&
         enemy.h + enemy.y > this.goku.y
       ) {
+        for (let i = 0; i < 15; i++) {
+          this.particles.push(
+            new Particle(
+              this.goku.x + this.goku.w / 2,
+              this.goku.y + this.goku.h / 2,
+              (Math.random() - 0.5) * 2,
+              (Math.random() - 0.5) * 2,
+              Math.random() * 5,
+              "#830707"
+            )
+          );
+        }
         this.goku.hp--;
         this.enemyArr.splice(i, 1);
-        console.log(this.goku.hp);
       }
     });
   };
@@ -183,9 +194,20 @@ class Game {
         enemy.y < this.goku.y + this.goku.h &&
         enemy.h + enemy.y > this.goku.y
       ) {
+        for (let i = 0; i < 15; i++) {
+          this.particles.push(
+            new Particle(
+              this.goku.x + this.goku.w / 2,
+              this.goku.y + this.goku.h / 2,
+              (Math.random() - 0.5) * 2,
+              (Math.random() - 0.5) * 2,
+              Math.random() * 3.5,
+              "#830707"
+            )
+          );
+        }
         this.goku.hp--;
         this.enemyArr2.splice(i, 1);
-        console.log(this.goku.hp);
       }
     });
   };
