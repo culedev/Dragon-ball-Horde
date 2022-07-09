@@ -8,13 +8,14 @@ class Game {
     this.enemyArr = [];
     this.enemyArr2 = [];
     this.gokuProjectile = [];
+    this.particles = [];
     this.isGameOn = true;
   }
 
   gameLoop = () => {
     //* 1. Limpiamos el CANVAS
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+    console.log(this.particles.length)
     //* 2. MOVIMIENTO Y ACCIONES
     this.removeProjectile();
     this.addNewEnemiesLeft();
@@ -25,7 +26,7 @@ class Game {
     this.projectileCollisionEnemyRight();
     this.gokuEnemyLeftCollision();
     this.gokuEnemyRightCollision();
-    this.gameOver()
+    this.gameOver();
 
     // * 3. DIBUJAR ELEMENTOS
     ctx.drawImage(this.bg, 0, 0, canvas.width, canvas.height);
@@ -42,6 +43,13 @@ class Game {
     // forEach enemyRight
     this.enemyArr2.forEach((enemy) => {
       enemy.updateEnemy();
+    });
+    // forEach particles
+    this.particles.forEach((particle, i) => {
+      if (particle.opacity <= 0) {
+        this.particles.splice(i,1)
+      }
+      particle.updateParticle();
     });
 
     //* 4. EFECTO RECURSION
@@ -105,6 +113,18 @@ class Game {
           enemy.y < projectile.y + projectile.h &&
           enemy.h + enemy.y > projectile.y
         ) {
+          for (let i = 0; i < 15; i++) {
+            this.particles.push(
+              new Particle(
+                enemy.x + enemy.w / 2,
+                enemy.y + enemy.h / 2,
+                (Math.random() - 0.5)*2,
+                (Math.random() - 0.5)*2,
+                Math.random() *3,
+                "#730797"
+              )
+            );
+          }
           this.gokuProjectile.splice(i, 1);
           this.enemyArr.splice(j, 1);
         }
@@ -121,6 +141,18 @@ class Game {
           enemy.y < projectile.y + projectile.h &&
           enemy.h + enemy.y > projectile.y
         ) {
+          for (let i = 0; i < 15; i++) {
+            this.particles.push(
+              new Particle(
+                enemy.x + enemy.w / 2,
+                enemy.y + enemy.h / 2,
+                (Math.random() - 0.5)*2,
+                (Math.random() - 0.5)*2,
+                Math.random() *3,
+                "#730797"
+              )
+            );
+          }
           this.gokuProjectile.splice(i, 1);
           this.enemyArr2.splice(j, 1);
         }
@@ -136,7 +168,7 @@ class Game {
         enemy.y < this.goku.y + this.goku.h &&
         enemy.h + enemy.y > this.goku.y
       ) {
-        this.goku.hp--
+        this.goku.hp--;
         this.enemyArr.splice(i, 1);
         console.log(this.goku.hp);
       }
@@ -151,7 +183,7 @@ class Game {
         enemy.y < this.goku.y + this.goku.h &&
         enemy.h + enemy.y > this.goku.y
       ) {
-        this.goku.hp--
+        this.goku.hp--;
         this.enemyArr2.splice(i, 1);
         console.log(this.goku.hp);
       }
@@ -162,6 +194,5 @@ class Game {
     if (this.goku.hp === 0) {
       this.isGameOn = false;
     }
-  }
-  
+  };
 }

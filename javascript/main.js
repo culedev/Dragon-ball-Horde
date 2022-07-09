@@ -15,11 +15,10 @@ const startBtn = document.querySelector("#start-btn");
 // score.innerText = 0;
 // ELEMENTOS DEL DOM
 
-
-
 // STATE MANAGEMENT FUNCTIONS
 const startGame = () => {
   startScreen.style.display = "none";
+  canvas.style.display = "block";
 
   game = new Game();
   game.gameLoop();
