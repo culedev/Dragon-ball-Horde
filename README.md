@@ -1,6 +1,5 @@
 # DRAGON HORDE
 
-
 ## [See the Game](www.your-url-here.com)
 NOTE: above link will be added later
 
