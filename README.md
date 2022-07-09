@@ -18,12 +18,6 @@ Are you ready to save the world? It's time to defeat freezer & cooler!
 
 # Proyect Structure
 
-- List here the JS files you think you might need. 
-- One main.js to manage DOM elements, one for Game class and one for each other class.
-- Recommended: Inside each file you can list the functions, clases, properties and methods you will need.
-
-Example:
-
 ## main.js
 
 ## game.js
