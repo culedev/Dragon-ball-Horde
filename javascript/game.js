@@ -14,16 +14,18 @@ class Game {
   gameLoop = () => {
     //* 1. Limpiamos el CANVAS
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
+
     //* 2. MOVIMIENTO Y ACCIONES
     this.removeProjectile();
     this.addNewEnemiesLeft();
     this.addNewEnemiesRight();
     this.removeEnemyArr();
     this.removeEnemyArr2();
-    this.projectileCollisionEnemyLeft()
-    this.projectileCollisionEnemyRight()
-    
+    this.projectileCollisionEnemyLeft();
+    this.projectileCollisionEnemyRight();
+    this.gokuEnemyLeftCollision();
+    this.gokuEnemyRightCollision();
+    this.gameOver()
 
     // * 3. DIBUJAR ELEMENTOS
     ctx.drawImage(this.bg, 0, 0, canvas.width, canvas.height);
@@ -36,7 +38,7 @@ class Game {
     // forEach enemyLeft
     this.enemyArr.forEach((enemy) => {
       enemy.updateEnemy();
-    }); 
+    });
     // forEach enemyRight
     this.enemyArr2.forEach((enemy) => {
       enemy.updateEnemy();
@@ -58,12 +60,12 @@ class Game {
     if (this.enemyArr.length > 20) {
       this.enemyArr.shift();
     }
-  }
+  };
   removeEnemyArr2 = () => {
     if (this.enemyArr2.length > 20) {
       this.enemyArr2.shift();
     }
-  }
+  };
 
   addNewEnemiesLeft = () => {
     let randomPosY = Math.random() * 600;
@@ -75,53 +77,91 @@ class Game {
     ) {
       this.enemyArr.push(newEnemieLeft);
     }
-   };
+  };
 
-   addNewEnemiesRight = () => {
+  addNewEnemiesRight = () => {
     let newRandomPosY = Math.random() * 600;
-    let newEnemieRight = new Enemy(canvas.width,newRandomPosY, -2, "./images/freezervolt.png")
+    let newEnemieRight = new Enemy(
+      canvas.width,
+      newRandomPosY,
+      -2,
+      "./images/freezervolt.png"
+    );
 
-    if (this.enemyArr2.length < 3  || this.enemyArr2[this.enemyArr2.length - 3].x < canvas.width * 0.7) {
-      this.enemyArr2.push(newEnemieRight)
+    if (
+      this.enemyArr2.length < 3 ||
+      this.enemyArr2[this.enemyArr2.length - 3].x < canvas.width * 0.7
+    ) {
+      this.enemyArr2.push(newEnemieRight);
     }
-  }
+  };
 
   projectileCollisionEnemyLeft = () => {
     this.gokuProjectile.forEach((projectile, i) => {
-      
       this.enemyArr.forEach((enemy, j) => {
-        
         if (
           enemy.x < projectile.x + projectile.w &&
           enemy.x + enemy.w > projectile.x &&
           enemy.y < projectile.y + projectile.h &&
           enemy.h + enemy.y > projectile.y
         ) {
-          console.log("Le has dado!")
-          this.gokuProjectile.splice(i,1)
-          this.enemyArr.splice(j,1)
+          this.gokuProjectile.splice(i, 1);
+          this.enemyArr.splice(j, 1);
         }
-      })
-    })
-}
+      });
+    });
+  };
 
-projectileCollisionEnemyRight = () => {
-  this.gokuProjectile.forEach((projectile, i) => {
-    
-    this.enemyArr2.forEach((enemy, j) => {
-      
+  projectileCollisionEnemyRight = () => {
+    this.gokuProjectile.forEach((projectile, i) => {
+      this.enemyArr2.forEach((enemy, j) => {
+        if (
+          enemy.x < projectile.x + projectile.w &&
+          enemy.x + enemy.w > projectile.x &&
+          enemy.y < projectile.y + projectile.h &&
+          enemy.h + enemy.y > projectile.y
+        ) {
+          this.gokuProjectile.splice(i, 1);
+          this.enemyArr2.splice(j, 1);
+        }
+      });
+    });
+  };
+
+  gokuEnemyLeftCollision = () => {
+    this.enemyArr.forEach((enemy, i) => {
       if (
-        enemy.x < projectile.x + projectile.w &&
-        enemy.x + enemy.w > projectile.x &&
-        enemy.y < projectile.y + projectile.h &&
-        enemy.h + enemy.y > projectile.y
+        enemy.x < this.goku.x + this.goku.w &&
+        enemy.x + enemy.w > this.goku.x &&
+        enemy.y < this.goku.y + this.goku.h &&
+        enemy.h + enemy.y > this.goku.y
       ) {
-        console.log("Le has dado!")
-        this.gokuProjectile.splice(i,1)
-        this.enemyArr2.splice(j,1)
+        this.goku.hp--
+        this.enemyArr.splice(i, 1);
+        console.log(this.goku.hp);
       }
-    })
-  })
-}
-}
+    });
+  };
 
+  gokuEnemyRightCollision = () => {
+    this.enemyArr2.forEach((enemy, i) => {
+      if (
+        enemy.x < this.goku.x + this.goku.w &&
+        enemy.x + enemy.w > this.goku.x &&
+        enemy.y < this.goku.y + this.goku.h &&
+        enemy.h + enemy.y > this.goku.y
+      ) {
+        this.goku.hp--
+        this.enemyArr2.splice(i, 1);
+        console.log(this.goku.hp);
+      }
+    });
+  };
+
+  gameOver = () => {
+    if (this.goku.hp === 0) {
+      this.isGameOn = false;
+    }
+  }
+  
+}

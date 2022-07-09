@@ -11,8 +11,11 @@ let deltaY;
 
 const startScreen = document.querySelector("#start-screen");
 const startBtn = document.querySelector("#start-btn");
-
+// const score = document.querySelector("#score span")
+// score.innerText = 0;
 // ELEMENTOS DEL DOM
+
+
 
 // STATE MANAGEMENT FUNCTIONS
 const startGame = () => {
@@ -21,6 +24,8 @@ const startGame = () => {
   game = new Game();
   game.gameLoop();
 };
+
+
 
 // ADDEVENTLISTENER
 startBtn.addEventListener("click", startGame);

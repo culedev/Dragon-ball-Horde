@@ -10,7 +10,6 @@ class Enemy {
     this.direction = 1; // 1 hacia derecha, -1 hacia izquierda
     this.image = new Image();
     this.image.src = src;
-    this.alive = true;
   }
 
   drawEnemy = () => {
