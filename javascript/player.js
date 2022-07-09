@@ -2,13 +2,14 @@ class Goku {
   constructor(src) {
     this.x = 400;
     this.y = 480;
-    this.w = 50;
-    this.h = 50;
+    this.w = 30;
+    this.h = 30;
     this.vx = 0;
     this.vy = 0;
     this.hp = 3;
     this.image = new Image();
     this.image.src;
+    this.alive = true;
   }
 
   drawGoku = () => {
@@ -43,20 +44,23 @@ class GokuProjectile {
         this.y = game.goku.y + game.goku.h/2;
         this.vx = vx;
         this.vy = vy;
-        this.radius = 10;
+        // this.radius = 10;
+        this.image = new Image()
+        this.image.src = "./images/gokuattack1.png"
 
     }
 
-    drawProjectile = () => {
-      ctx.beginPath()
-      ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2)
-      ctx.fillStyle = "green"
-      ctx.fill()
-      ctx.closePath()
-    }
+     drawProjectile = () => {
+    // ctx.beginPath()
+    // ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2)
+    // ctx.fillStyle = "green"
+    // ctx.fill()
+    // ctx.closePath()
+    ctx.drawImage(this.image,this.x,this.y, 22,22)
+     }
 
     updateProjectile = () => {
-      this.drawProjectile();
+      this.drawProjectile();     
       this.x += this.vx
       this.y += this.vy
     }

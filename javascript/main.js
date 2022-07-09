@@ -45,42 +45,56 @@ window.addEventListener("keydown", ({ keyCode }) => {
 window.addEventListener("keyup", ({ keyCode }) => {
   switch (keyCode) {
     case 87:
+      game.goku.image.src = "../images/gokuIddle.png";
       game.goku.vy = 0;
       break;
     case 68:
+      game.goku.image.src = "../images/gokuIddle.png";
       game.goku.vx = 0;
       break;
     case 83:
+      game.goku.image.src = "../images/gokuIddle.png";
       game.goku.vy = 0;
       break;
     case 65:
+      game.goku.image.src = "../images/gokuIddle.png";
       game.goku.vx = 0;
       break;
   }
 });
+// Projectile goes to cursor!! WOW!
+canvas.addEventListener("click", (event) => {
+  deltaX = event.offsetX - game.goku.x;
+  deltaY = event.offsetY - game.goku.y;
 
-canvas.addEventListener("click", ({offsetX, offsetY}) => {
-  deltaX = offsetX - (game.goku.x);
-  deltaY = offsetY - (game.goku.y);
-  console.log(event)
-  let rotation = Math.atan2(deltaX, deltaY, type);
+  let rotation = Math.atan2(deltaX, deltaY);
 
-  let ProjectileVx = Math.sin(rotation) * 4;
-  let ProjectileVy = Math.cos(rotation) * 4; 
-  let newProjectile = new GokuProjectile(ProjectileVx,ProjectileVy);
+  let ProjectileVx = Math.sin(rotation) * 6;
+  let ProjectileVy = Math.cos(rotation) * 6;
+  let newProjectile = new GokuProjectile(ProjectileVx, ProjectileVy);
+  let random = Math.floor(Math.random() * 2);
 
-  game.gokuProjectile.push(newProjectile)
-}
-)
-
-canvas.addEventListener("mousemove", ({offsetX}) => {
-  let gokuX = game.goku.x;
- 
-  if (offsetX > gokuX) {
-    game.goku.image.src = "../images/gokuright.png"
-  } else {
-    game.goku.image.src = "../images/gokuleft.png"
+  if (random === 1) {
+    game.goku.image.src = "./images/gokuposeattack1right.png";
+  } else if (random === 0) {
+    game.goku.image.src = "./images/gokuposseattack1right2.png";
   }
-  
-}
-)
+
+  // if (random === 1 && deltaX < 0) {
+  //   game.goku.image.src = "../images/gokuposseattack1left.png"
+  // } else if (random === 0 && deltax < 0) {
+  //   game.goku.image.src = "../images/gokuposseattack2left.png"
+  // }
+
+  game.gokuProjectile.push(newProjectile);
+});
+// swapping imgs
+canvas.addEventListener("mousemove", ({ offsetX }) => {
+  let gokuX = game.goku.x;
+
+  if (offsetX > gokuX) {
+    game.goku.image.src = "../images/gokuright.png";
+  } else {
+    game.goku.image.src = "../images/gokuleft.png";
+  }
+});
