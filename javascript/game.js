@@ -6,6 +6,7 @@ class Game {
     this.bg = new Image();
     this.bg.src = "./images/Scene1.jpg";
     this.enemyArr = [];
+    this.enemyArr2 = [];
     this.gokuProjectile = [];
     this.isGameOn = true;
   }
@@ -13,11 +14,14 @@ class Game {
   gameLoop = () => {
     //* 1. Limpiamos el CANVAS
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    console.log(this.enemyArr.length)
+    
     //* 2. MOVIMIENTO Y ACCIONES
     this.removeProjectile();
     this.addNewEnemiesLeft();
-    this.removeEnemyArr()
+    this.addNewEnemiesRight();
+    this.removeEnemyArr();
+    this.removeEnemyArr2();
+
     // * 3. DIBUJAR ELEMENTOS
     ctx.drawImage(this.bg, 0, 0, canvas.width, canvas.height);
     this.goku.updatePlayer();
@@ -25,8 +29,13 @@ class Game {
     this.gokuProjectile.forEach((projectile) => {
       projectile.updateProjectile();
     });
-    // forEach enemy
+
+    // forEach enemyLeft
     this.enemyArr.forEach((enemy) => {
+      enemy.updateEnemy();
+    }); 
+    // forEach enemyRight
+    this.enemyArr2.forEach((enemy) => {
       enemy.updateEnemy();
     });
 
@@ -47,16 +56,32 @@ class Game {
       this.enemyArr.shift();
     }
   }
+  removeEnemyArr2 = () => {
+    if (this.enemyArr2.length > 20) {
+      this.enemyArr2.shift();
+    }
+  }
 
   addNewEnemiesLeft = () => {
     let randomPosY = Math.random() * 600;
-    let newEnemieLeft = new Enemy(2, randomPosY, 2, "../images/freezer.png");
+    let newEnemieLeft = new Enemy(0, randomPosY, 2, "./images/freezer.png");
 
     if (
-      this.enemyArr.length < 5 ||
-      this.enemyArr[this.enemyArr.length - 5].x > canvas.width * 0.5
+      this.enemyArr.length < 3 ||
+      this.enemyArr[this.enemyArr.length - 3].x > canvas.width * 0.3
     ) {
       this.enemyArr.push(newEnemieLeft);
     }
-  };
+   };
+
+   addNewEnemiesRight = () => {
+    let newRandomPosY = Math.random() * 600;
+    let newEnemieRight = new Enemy(canvas.width,newRandomPosY, -2, "./images/freezervolt.png")
+
+    if (this.enemyArr2.length < 3  || this.enemyArr2[this.enemyArr2.length - 3].x < canvas.width * 0.7) {
+      this.enemyArr2.push(newEnemieRight)
+    }
+    
+  }
+  
 }
