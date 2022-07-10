@@ -6,7 +6,7 @@ class Goku {
     this.h = 30;
     this.vx = 0;
     this.vy = 0;
-    this.hp = 3;
+    this.hp = 100;
     this.ki = 0;
     this.image = new Image();
     this.image.src;

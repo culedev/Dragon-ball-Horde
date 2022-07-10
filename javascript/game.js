@@ -23,7 +23,6 @@ class Game {
     //* 2. MOVIMIENTO Y ACCIONES
     this.removeProjectile();
     this.removeKiProjectile();
-    console.log(this.gokuKiProjectile.length);
     // Add Enemies
     this.addNewEnemiesLeft();
     this.addNewEnemiesRight();
@@ -46,7 +45,8 @@ class Game {
     this.gokuEnemyPlusCollision();
     // GAME OVER!!!
     this.gameOver();
-
+    // AUDIOS
+    combatAudio.play()
     // * 3. DIBUJAR ELEMENTOS
     ctx.drawImage(this.bg, 0, 0, canvas.width, canvas.height);
     this.goku.updatePlayer();
@@ -181,6 +181,7 @@ class Game {
           }
           this.gokuProjectile.splice(i, 1);
           this.enemyArr.splice(j, 1);
+          score.innerHTML++
         }
       });
     });
@@ -209,6 +210,7 @@ class Game {
           }
           this.gokuProjectile.splice(i, 1);
           this.enemyArr2.splice(j, 1);
+          score.innerHTML++
         }
       });
     });
@@ -239,6 +241,7 @@ class Game {
           this.gokuProjectile.splice(i, 1);
           if (enemy.hp === 0) {
             this.enemyPlusArr.splice(j, 1);
+            
           }
         }
       });
@@ -266,6 +269,7 @@ class Game {
             );
           }
           this.enemyArr.splice(j, 1);
+          score.innerHTML++
         }
       });
     });
@@ -292,6 +296,7 @@ class Game {
             );
           }
           this.enemyArr2.splice(j, 1);
+          score.innerHTML++
         }
       });
     });
@@ -320,6 +325,7 @@ class Game {
           enemy.hp--;
           if (enemy.hp === 0) {
             this.enemyPlusArr.splice(j, 1);
+            score.innerHTML = Number(score.innerHTML) + 10
           }
         }
       });
@@ -346,8 +352,10 @@ class Game {
             )
           );
         }
-        this.goku.hp--;
-        this.goku.image.src = "./images/gokureceivedmg.png"
+        this.goku.hp -= 34;
+        console.log(this.goku.hp);
+        gokuHp.style.width = this.goku.hp + "%";
+        this.goku.image.src = "./images/gokureceivedmg.png";
         this.enemyArr.splice(i, 1);
       }
     });
@@ -373,8 +381,10 @@ class Game {
             )
           );
         }
-        this.goku.hp--;
-        this.goku.image.src = "./images/gokureceivedmg.png"
+        this.goku.hp -= 34;
+        console.log(this.goku.hp);
+        gokuHp.style.width = this.goku.hp + "%";
+        this.goku.image.src = "./images/gokureceivedmg.png";
         this.enemyArr2.splice(i, 1);
       }
     });
@@ -400,22 +410,27 @@ class Game {
             )
           );
         }
-        this.goku.hp--;
-        this.goku.image.src = "./images/gokureceivedmg.png"
+        this.goku.hp -= 34;
+        console.log(this.goku.hp);
+        gokuHp.style.width = this.goku.hp + "%";
+        this.goku.image.src = "./images/gokureceivedmg.png";
         this.enemyPlusArr.splice(i, 1);
       }
     });
   };
 
   gameOver = () => {
-    if (this.goku.hp === 0) {
+    if (this.goku.hp < 0) {
+      gokuHp.style.width = 0 + "%";
       this.goku.vx = 0;
       this.goku.vy = 0;
-      this.goku.image.src = "./images/gokudeath.png"     
+      this.goku.image.src = "./images/gokudeath.png";
       setInterval(() => {
-        this.goku.image.src = "./images/gokudeath.png"  
+        this.goku.image.src = "./images/gokudeath.png";
+        combatAudio.pause()    
         this.isGameOn = false;
-      }, 500);    
+      }, 500);
+      gameOverAudio.play()
     }
   };
 }

@@ -8,10 +8,17 @@ const ctx = canvas.getContext("2d");
 let game;
 let deltaX;
 let deltaY;
+const combatAudio = new Audio("./sounds/combatsound.webm")
+const gameOverAudio = new Audio("./sounds/gameover.webm")
+
 
 const startScreen = document.querySelector("#start-screen");
 const startBtn = document.querySelector("#start-btn");
-const UI = document.querySelector(".canvas-score-health")
+const UI = document.querySelector(".canvas-score-health");
+const gokuHp = document.querySelector(".healthbar");
+const gokuKi = document.querySelector(".kibar");
+const score = document.querySelector(".score span")
+score.innerHTML = 0;
 // ELEMENTOS DEL DOM
 
 // STATE MANAGEMENT FUNCTIONS
@@ -99,7 +106,8 @@ window.addEventListener("keydown", ({ keyCode }) => {
     game.goku.vy = 0;
     game.goku.vx = 0;
 
-    game.goku.ki++;
+    game.goku.ki = game.goku.ki + 2;
+    gokuKi.style.width = game.goku.ki + "%";
     console.log(game.goku.ki);
   }
 });
@@ -115,10 +123,11 @@ canvas.addEventListener("contextmenu", (event) => {
   let ProjectileVy = Math.cos(rotation) * 6;
   let newProjectile = new GokuKiProjectile(ProjectileVx, ProjectileVy);
 
-  if (game.goku.ki >= 10) {
+  if (game.goku.ki >= 100) {
     game.goku.image.src = "./images/gokuposeattack2.png";
     game.gokuKiProjectile.push(newProjectile);
     game.goku.ki = 0;
+    gokuKi.style.width = 0 + "%";
   }
 });
 

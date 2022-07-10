@@ -5,28 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/style.css">
-    <title>Game-Project</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <title>DRAGON BALL HORDE</title>
 </head>
 <body>
     
     <div class="container">
+
         <div id="start-screen">
+            <img src="./images/titulo-start.png" alt="title" width="500px">
             <button id="start-btn">START</button>
         </div>
 
         <div class="canvas-score-health">
-            <div class="score-health">
+            <div class="ki-health">              
                 <div class="health">
-
+                    <div class="healthbar"></div> 
                 </div>
                 <div class="ki">
-
+                    <div class="kibar"></div>
                 </div>
             </div>
             <div class="score">
                 <img src="/images/SCORE1.png" alt="SCORE"><span>100</span>
             </div>
-            <canvas id="canvas" width="800" height="600"></canvas>
+            <canvas id="canvas" width="800" height="600"></canvas>            
         </div>
 
 
