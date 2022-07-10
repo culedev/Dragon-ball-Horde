@@ -43,13 +43,35 @@ class GokuProjectile {
     this.vy = vy;
     this.w = 30;
     this.h = 30;
-    // this.radius = 10;
     this.image = new Image();
     this.image.src = "./images/gokuattack1.png";
   }
 
   drawProjectile = () => {
     ctx.drawImage(this.image, this.x, this.y, 22, 22);
+  };
+
+  updateProjectile = () => {
+    this.drawProjectile();
+    this.x += this.vx;
+    this.y += this.vy;
+  };
+}
+
+class GokuKiProjectile {
+  constructor(vx, vy) {
+    this.x = game.goku.x;
+    this.y = game.goku.y - 20;
+    this.vx = vx;
+    this.vy = vy;
+    this.w = 150;
+    this.h = 150;
+    this.image = new Image();
+    this.image.src = "./images/gokuattack2.png";
+  }
+
+  drawProjectile = () => {
+    ctx.drawImage(this.image, this.x, this.y, 100, 100);
   };
 
   updateProjectile = () => {
@@ -88,28 +110,5 @@ class Particle {
     this.x += this.vx;
     this.y += this.vy;
     this.opacity -= 0.01;
-  };
-}
-
-class GokuKiProjectile {
-  constructor(vx, vy) {
-    this.x = game.goku.x;
-    this.y = game.goku.y - 20;
-    this.vx = vx;
-    this.vy = vy;
-    this.w = 150;
-    this.h = 150;
-    this.image = new Image();
-    this.image.src = "./images/gokuattack2.png";
-  }
-
-  drawProjectile = () => {
-    ctx.drawImage(this.image, this.x, this.y, 100, 100);
-  };
-
-  updateProjectile = () => {
-    this.drawProjectile();
-    this.x += this.vx;
-    this.y += this.vy;
   };
 }

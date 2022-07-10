@@ -27,8 +27,8 @@ class EnemyPlus {
   constructor(x, y, vy, src) {
     this.x = x;
     this.y = y;
-    this.w = 30;
-    this.h = 30;
+    this.w = 50;
+    this.h = 50;
     this.vx = 0;
     this.vy = vy;
     this.hp = 4;
@@ -37,7 +37,7 @@ class EnemyPlus {
   }
 
   drawEnemy = () => {
-    ctx.drawImage(this.image, this.x, this.y)
+    ctx.drawImage(this.image, this.x, this.y, 50, 50)
   };
 
   updateEnemyPlus = () => {

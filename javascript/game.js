@@ -409,7 +409,13 @@ class Game {
 
   gameOver = () => {
     if (this.goku.hp === 0) {
-      this.isGameOn = false;
+      this.goku.vx = 0;
+      this.goku.vy = 0;
+      this.goku.image.src = "./images/gokudeath.png"     
+      setInterval(() => {
+        this.goku.image.src = "./images/gokudeath.png"  
+        this.isGameOn = false;
+      }, 1000);    
     }
   };
 }
