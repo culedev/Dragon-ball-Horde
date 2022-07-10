@@ -108,7 +108,6 @@ window.addEventListener("keydown", ({ keyCode }) => {
 
     game.goku.ki = game.goku.ki + 2;
     gokuKi.style.width = game.goku.ki + "%";
-    console.log(game.goku.ki);
   }
 });
 //EVENT RIGHT CLICK -> KI ATTACK!
@@ -130,14 +129,3 @@ canvas.addEventListener("contextmenu", (event) => {
     gokuKi.style.width = 0 + "%";
   }
 });
-
-// swapping imgs
-// canvas.addEventListener("mousemove", ({ offsetX }) => {
-//   let gokuX = game.goku.x;
-
-//   if (offsetX > gokuX) {
-//     game.goku.image.src = "./images/gokuright.png";
-//   } else {
-//     game.goku.image.src = "./images/gokuleft.png";
-//   }
-// });
