@@ -5,11 +5,15 @@ class Game {
     this.goku = new Goku();
     this.bg = new Image();
     this.bg.src = "./images/Scene1.jpg";
+
     this.enemyArr = [];
     this.enemyArr2 = [];
     this.enemyPlusArr = [];
+
     this.gokuProjectile = [];
+    this.gokuKiProjectile = [];
     this.particles = [];
+
     this.isGameOn = true;
   }
 
@@ -18,6 +22,8 @@ class Game {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     //* 2. MOVIMIENTO Y ACCIONES
     this.removeProjectile();
+    this.removeKiProjectile();
+    console.log(this.gokuKiProjectile.length);
     // Add Enemies
     this.addNewEnemiesLeft();
     this.addNewEnemiesRight();
@@ -30,6 +36,10 @@ class Game {
     this.projectileCollisionEnemyLeft();
     this.projectileCollisionEnemyRight();
     this.projectileCollisionEnemyPlus();
+    // Projectile KI collision enemies
+    this.KiCollisionEnemyLeft();
+    this.KiCollisionEnemyRight();
+    this.KiCollisionEnemyPlus();
     // Character collision enemies
     this.gokuEnemyLeftCollision();
     this.gokuEnemyRightCollision();
@@ -44,7 +54,10 @@ class Game {
     this.gokuProjectile.forEach((projectile) => {
       projectile.updateProjectile();
     });
-
+    // KI PROJECTILE
+    this.gokuKiProjectile.forEach((projectile) => {
+      projectile.updateProjectile();
+    });
     // forEach enemyLeft
     this.enemyArr.forEach((enemy) => {
       enemy.updateEnemy();
@@ -74,6 +87,12 @@ class Game {
   removeProjectile = () => {
     if (this.gokuProjectile.length > 15) {
       this.gokuProjectile.shift();
+    }
+  };
+
+  removeKiProjectile = () => {
+    if (this.gokuKiProjectile.length > 1) {
+      this.gokuKiProjectile.shift();
     }
   };
 
@@ -225,6 +244,87 @@ class Game {
       });
     });
   };
+  KiCollisionEnemyLeft = () => {
+    this.gokuKiProjectile.forEach((projectile) => {
+      this.enemyArr.forEach((enemy, j) => {
+        if (
+          enemy.x < projectile.x + projectile.w &&
+          enemy.x + enemy.w > projectile.x &&
+          enemy.y < projectile.y + projectile.h &&
+          enemy.h + enemy.y > projectile.y
+        ) {
+          for (let i = 0; i < 15; i++) {
+            this.particles.push(
+              new Particle(
+                enemy.x + enemy.w / 2,
+                enemy.y + enemy.h / 2,
+                (Math.random() - 0.5) * 2,
+                (Math.random() - 0.5) * 2,
+                Math.random() * 3.5,
+                "#730797"
+              )
+            );
+          }
+          this.enemyArr.splice(j, 1);
+        }
+      });
+    });
+  };
+  KiCollisionEnemyRight = () => {
+    this.gokuKiProjectile.forEach((projectile) => {
+      this.enemyArr2.forEach((enemy, j) => {
+        if (
+          enemy.x < projectile.x + projectile.w &&
+          enemy.x + enemy.w > projectile.x &&
+          enemy.y < projectile.y + projectile.h &&
+          enemy.h + enemy.y > projectile.y
+        ) {
+          for (let i = 0; i < 15; i++) {
+            this.particles.push(
+              new Particle(
+                enemy.x + enemy.w / 2,
+                enemy.y + enemy.h / 2,
+                (Math.random() - 0.5) * 2,
+                (Math.random() - 0.5) * 2,
+                Math.random() * 3.5,
+                "#730797"
+              )
+            );
+          }
+          this.enemyArr2.splice(j, 1);
+        }
+      });
+    });
+  };
+  KiCollisionEnemyPlus = () => {
+    this.gokuKiProjectile.forEach((projectile) => {
+      this.enemyPlusArr.forEach((enemy, j) => {
+        if (
+          enemy.x < projectile.x + projectile.w &&
+          enemy.x + enemy.w > projectile.x &&
+          enemy.y < projectile.y + projectile.h &&
+          enemy.h + enemy.y > projectile.y
+        ) {
+          for (let i = 0; i < 15; i++) {
+            this.particles.push(
+              new Particle(
+                enemy.x + enemy.w / 2,
+                enemy.y + enemy.h / 2,
+                (Math.random() - 0.5) * 2,
+                (Math.random() - 0.5) * 2,
+                Math.random() * 3.5,
+                "#730797"
+              )
+            );
+          }
+          enemy.hp--;
+          if (enemy.hp === 0) {
+            this.enemyPlusArr.splice(j, 1);
+          }
+        }
+      });
+    });
+  };
 
   gokuEnemyLeftCollision = () => {
     this.enemyArr.forEach((enemy, i) => {
@@ -247,6 +347,7 @@ class Game {
           );
         }
         this.goku.hp--;
+        this.goku.image.src = "./images/gokureceivedmg.png"
         this.enemyArr.splice(i, 1);
       }
     });
@@ -273,6 +374,7 @@ class Game {
           );
         }
         this.goku.hp--;
+        this.goku.image.src = "./images/gokureceivedmg.png"
         this.enemyArr2.splice(i, 1);
       }
     });
@@ -299,6 +401,7 @@ class Game {
           );
         }
         this.goku.hp--;
+        this.goku.image.src = "./images/gokureceivedmg.png"
         this.enemyPlusArr.splice(i, 1);
       }
     });

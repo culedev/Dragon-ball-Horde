@@ -7,6 +7,7 @@ class Goku {
     this.vx = 0;
     this.vy = 0;
     this.hp = 3;
+    this.ki = 0;
     this.image = new Image();
     this.image.src;
     this.alive = true;
@@ -87,5 +88,28 @@ class Particle {
     this.x += this.vx;
     this.y += this.vy;
     this.opacity -= 0.01;
+  };
+}
+
+class GokuKiProjectile {
+  constructor(vx, vy) {
+    this.x = game.goku.x;
+    this.y = game.goku.y - 20;
+    this.vx = vx;
+    this.vy = vy;
+    this.w = 150;
+    this.h = 150;
+    this.image = new Image();
+    this.image.src = "./images/gokuattack2.png";
+  }
+
+  drawProjectile = () => {
+    ctx.drawImage(this.image, this.x, this.y, 100, 100);
+  };
+
+  updateProjectile = () => {
+    this.drawProjectile();
+    this.x += this.vx;
+    this.y += this.vy;
   };
 }
