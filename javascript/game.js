@@ -43,10 +43,12 @@ class Game {
     this.gokuEnemyLeftCollision();
     this.gokuEnemyRightCollision();
     this.gokuEnemyPlusCollision();
+    // Recover HP
+    this.recoverHp();
     // GAME OVER!!!
     this.gameOver();
     // AUDIOS
-    combatAudio.play()
+    combatAudio.play();
     // * 3. DIBUJAR ELEMENTOS
     ctx.drawImage(this.bg, 0, 0, canvas.width, canvas.height);
     this.goku.updatePlayer();
@@ -84,6 +86,7 @@ class Game {
     }
   };
 
+  // REMOVE PROJECTILES
   removeProjectile = () => {
     if (this.gokuProjectile.length > 15) {
       this.gokuProjectile.shift();
@@ -95,23 +98,25 @@ class Game {
       this.gokuKiProjectile.shift();
     }
   };
-
+  // REMOVE ENEMIES
   removeEnemyArr = () => {
     if (this.enemyArr.length > 20) {
       this.enemyArr.shift();
     }
   };
+
   removeEnemyArr2 = () => {
     if (this.enemyArr2.length > 20) {
       this.enemyArr2.shift();
     }
   };
+
   removeEnemyPlusArr = () => {
     if (this.enemyPlusArr.length > 20) {
       this.enemyPlusArr.shift();
     }
   };
-
+  // ADD NEW ENEMIES
   addNewEnemiesLeft = () => {
     let randomPosY = Math.random() * 600;
     let newEnemieLeft = new Enemy(0, randomPosY, 2, "./images/freezer.png");
@@ -140,6 +145,7 @@ class Game {
       this.enemyArr2.push(newEnemieRight);
     }
   };
+
   addNewEnemiesPlus = () => {
     let newRandomPosX = Math.random() * 600;
     let newEnemiePlus = new EnemyPlus(
@@ -157,7 +163,7 @@ class Game {
       }
     }, 4000);
   };
-
+  // PROJECTILE COLLISION
   projectileCollisionEnemyLeft = () => {
     this.gokuProjectile.forEach((projectile, i) => {
       this.enemyArr.forEach((enemy, j) => {
@@ -181,7 +187,7 @@ class Game {
           }
           this.gokuProjectile.splice(i, 1);
           this.enemyArr.splice(j, 1);
-          score.innerHTML++
+          score.innerHTML++;
         }
       });
     });
@@ -210,7 +216,7 @@ class Game {
           }
           this.gokuProjectile.splice(i, 1);
           this.enemyArr2.splice(j, 1);
-          score.innerHTML++
+          score.innerHTML++;
         }
       });
     });
@@ -241,12 +247,12 @@ class Game {
           this.gokuProjectile.splice(i, 1);
           if (enemy.hp === 0) {
             this.enemyPlusArr.splice(j, 1);
-            
           }
         }
       });
     });
   };
+  // KI PROJECTILE COLLISION
   KiCollisionEnemyLeft = () => {
     this.gokuKiProjectile.forEach((projectile) => {
       this.enemyArr.forEach((enemy, j) => {
@@ -269,11 +275,12 @@ class Game {
             );
           }
           this.enemyArr.splice(j, 1);
-          score.innerHTML++
+          score.innerHTML++;
         }
       });
     });
   };
+
   KiCollisionEnemyRight = () => {
     this.gokuKiProjectile.forEach((projectile) => {
       this.enemyArr2.forEach((enemy, j) => {
@@ -296,11 +303,12 @@ class Game {
             );
           }
           this.enemyArr2.splice(j, 1);
-          score.innerHTML++
+          score.innerHTML++;
         }
       });
     });
   };
+
   KiCollisionEnemyPlus = () => {
     this.gokuKiProjectile.forEach((projectile) => {
       this.enemyPlusArr.forEach((enemy, j) => {
@@ -325,13 +333,13 @@ class Game {
           enemy.hp--;
           if (enemy.hp === 0) {
             this.enemyPlusArr.splice(j, 1);
-            score.innerHTML = Number(score.innerHTML) + 10
+            score.innerHTML = Number(score.innerHTML) + 10;
           }
         }
       });
     });
   };
-
+  // Goku enemy collisions
   gokuEnemyLeftCollision = () => {
     this.enemyArr.forEach((enemy, i) => {
       if (
@@ -418,7 +426,14 @@ class Game {
       }
     });
   };
-
+  // RECOVER HP
+  recoverHp = () => {
+    if (this.goku.hp < 85 && Number(score.innerHTML) % 50 === 0) {
+      this.goku.hp += 10;
+      gokuHp.style.width = this.goku.hp + "%";
+    }
+  };
+  // GAMEOVER
   gameOver = () => {
     if (this.goku.hp < 0) {
       gokuHp.style.width = 0 + "%";
@@ -427,10 +442,10 @@ class Game {
       this.goku.image.src = "./images/gokudeath.png";
       setInterval(() => {
         this.goku.image.src = "./images/gokudeath.png";
-        combatAudio.pause()    
+        combatAudio.pause();
         this.isGameOn = false;
       }, 500);
-      gameOverAudio.play()
+      gameOverAudio.play();
     }
   };
 }

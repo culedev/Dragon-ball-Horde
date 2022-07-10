@@ -1,4 +1,4 @@
-// COMIENZA PROYECTO EN MAIN
+// --> DRAGON BALL HORDE <--
 
 // CANVAS CONF
 const canvas = document.querySelector("#canvas");
@@ -11,7 +11,7 @@ let deltaY;
 const combatAudio = new Audio("./sounds/combatsound.webm")
 const gameOverAudio = new Audio("./sounds/gameover.webm")
 
-
+// ELEMENTOS DEL DOM
 const startScreen = document.querySelector("#start-screen");
 const startBtn = document.querySelector("#start-btn");
 const UI = document.querySelector(".canvas-score-health");
@@ -19,7 +19,6 @@ const gokuHp = document.querySelector(".healthbar");
 const gokuKi = document.querySelector(".kibar");
 const score = document.querySelector(".score span")
 score.innerHTML = 0;
-// ELEMENTOS DEL DOM
 
 // STATE MANAGEMENT FUNCTIONS
 const startGame = () => {
