@@ -11,12 +11,14 @@ let deltaY;
 
 const startScreen = document.querySelector("#start-screen");
 const startBtn = document.querySelector("#start-btn");
+const UI = document.querySelector(".canvas-score-health")
 // ELEMENTOS DEL DOM
 
 // STATE MANAGEMENT FUNCTIONS
 const startGame = () => {
   startScreen.style.display = "none";
   canvas.style.display = "block";
+  UI.style.display = "block";
 
   game = new Game();
   game.gameLoop();

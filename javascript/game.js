@@ -415,7 +415,7 @@ class Game {
       setInterval(() => {
         this.goku.image.src = "./images/gokudeath.png"  
         this.isGameOn = false;
-      }, 1000);    
+      }, 500);    
     }
   };
 }
