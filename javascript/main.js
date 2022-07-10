@@ -32,16 +32,20 @@ startBtn.addEventListener("click", startGame);
 window.addEventListener("keydown", ({ keyCode }) => {
   switch (keyCode) {
     case 87:
-      game.goku.vy = -2;
+      game.goku.image.src = "./images/gokuup.png"
+      game.goku.vy = -2.5;
       break;
     case 68:
-      game.goku.vx = 2;
+      game.goku.image.src = "./images/gokuright.png"
+      game.goku.vx = 2.5;
       break;
     case 83:
-      game.goku.vy = 2;
+      game.goku.image.src = "./images/gokudown.png"
+      game.goku.vy = 2.5;
       break;
     case 65:
-      game.goku.vx = -2;
+      game.goku.image.src = "./images/gokuleft.png"
+      game.goku.vx = -2.5;
       break;
   }
 });
@@ -78,27 +82,27 @@ canvas.addEventListener("click", (event) => {
   let newProjectile = new GokuProjectile(ProjectileVx, ProjectileVy);
   let random = Math.floor(Math.random() * 2);
 
-  if (random === 1) {
+  if (deltaX > 0) {
     game.goku.image.src = "./images/gokuposeattack1right.png";
-  } else if (random === 0) {
-    game.goku.image.src = "./images/gokuposseattack1right2.png";
+  } else if (deltaX < 0) {
+    game.goku.image.src = "./images/gokuposseattack2left.png";
   }
 
   // if (random === 1 && deltaX < 0) {
-  //   game.goku.image.src = "../images/gokuposseattack1left.png"
+  //   game.goku.image.src = "./images/gokuposseattack1left.png"
   // } else if (random === 0 && deltax < 0) {
-  //   game.goku.image.src = "../images/gokuposseattack2left.png"
+  //   game.goku.image.src = "./images/gokuposseattack2left.png"
   // }
 
   game.gokuProjectile.push(newProjectile);
 });
 // swapping imgs
-canvas.addEventListener("mousemove", ({ offsetX }) => {
-  let gokuX = game.goku.x;
+// canvas.addEventListener("mousemove", ({ offsetX }) => {
+//   let gokuX = game.goku.x;
 
-  if (offsetX > gokuX) {
-    game.goku.image.src = "../images/gokuright.png";
-  } else {
-    game.goku.image.src = "../images/gokuleft.png";
-  }
-});
+//   if (offsetX > gokuX) {
+//     game.goku.image.src = "./images/gokuright.png";
+//   } else {
+//     game.goku.image.src = "./images/gokuleft.png";
+//   }
+// });

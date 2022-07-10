@@ -7,6 +7,7 @@ class Game {
     this.bg.src = "./images/Scene1.jpg";
     this.enemyArr = [];
     this.enemyArr2 = [];
+    this.enemyPlusArr = [];
     this.gokuProjectile = [];
     this.particles = [];
     this.isGameOn = true;
@@ -15,17 +16,25 @@ class Game {
   gameLoop = () => {
     //* 1. Limpiamos el CANVAS
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    console.log(this.particles.length);
     //* 2. MOVIMIENTO Y ACCIONES
     this.removeProjectile();
+    // Add Enemies
     this.addNewEnemiesLeft();
     this.addNewEnemiesRight();
+    this.addNewEnemiesPlus();
+    // Remove Enemies
     this.removeEnemyArr();
     this.removeEnemyArr2();
+    this.removeEnemyPlusArr();
+    // Projectile collision enemies
     this.projectileCollisionEnemyLeft();
     this.projectileCollisionEnemyRight();
+    this.projectileCollisionEnemyPlus();
+    // Character collision enemies
     this.gokuEnemyLeftCollision();
     this.gokuEnemyRightCollision();
+    this.gokuEnemyPlusCollision();
+    // GAME OVER!!!
     this.gameOver();
 
     // * 3. DIBUJAR ELEMENTOS
@@ -43,6 +52,10 @@ class Game {
     // forEach enemyRight
     this.enemyArr2.forEach((enemy) => {
       enemy.updateEnemy();
+    });
+    // forEach enemyPlus
+    this.enemyPlusArr.forEach((enemy) => {
+      enemy.updateEnemyPlus();
     });
     // forEach particles
     this.particles.forEach((particle, i) => {
@@ -74,6 +87,11 @@ class Game {
       this.enemyArr2.shift();
     }
   };
+  removeEnemyPlusArr = () => {
+    if (this.enemyPlusArr.length > 20) {
+      this.enemyPlusArr.shift();
+    }
+  };
 
   addNewEnemiesLeft = () => {
     let randomPosY = Math.random() * 600;
@@ -102,6 +120,23 @@ class Game {
     ) {
       this.enemyArr2.push(newEnemieRight);
     }
+  };
+  addNewEnemiesPlus = () => {
+    let newRandomPosX = Math.random() * 600;
+    let newEnemiePlus = new EnemyPlus(
+      newRandomPosX,
+      0,
+      2,
+      "./images/cooler.png"
+    );
+    setInterval(() => {
+      if (
+        this.enemyPlusArr.length < 2 ||
+        this.enemyPlusArr[this.enemyPlusArr.length - 2].y > canvas.height
+      ) {
+        this.enemyPlusArr.push(newEnemiePlus);
+      }
+    }, 4000);
   };
 
   projectileCollisionEnemyLeft = () => {
@@ -160,6 +195,37 @@ class Game {
     });
   };
 
+  projectileCollisionEnemyPlus = () => {
+    this.gokuProjectile.forEach((projectile, i) => {
+      this.enemyPlusArr.forEach((enemy, j) => {
+        if (
+          enemy.x < projectile.x + projectile.w &&
+          enemy.x + enemy.w > projectile.x &&
+          enemy.y < projectile.y + projectile.h &&
+          enemy.h + enemy.y > projectile.y
+        ) {
+          for (let i = 0; i < 15; i++) {
+            this.particles.push(
+              new Particle(
+                enemy.x + enemy.w / 2,
+                enemy.y + enemy.h / 2,
+                (Math.random() - 0.5) * 2,
+                (Math.random() - 0.5) * 2,
+                Math.random() * 3.5,
+                "#730797"
+              )
+            );
+          }
+          enemy.hp--;
+          this.gokuProjectile.splice(i, 1);
+          if (enemy.hp === 0) {
+            this.enemyPlusArr.splice(j, 1);
+          }
+        }
+      });
+    });
+  };
+
   gokuEnemyLeftCollision = () => {
     this.enemyArr.forEach((enemy, i) => {
       if (
@@ -208,6 +274,32 @@ class Game {
         }
         this.goku.hp--;
         this.enemyArr2.splice(i, 1);
+      }
+    });
+  };
+
+  gokuEnemyPlusCollision = () => {
+    this.enemyPlusArr.forEach((enemy, i) => {
+      if (
+        enemy.x < this.goku.x + this.goku.w &&
+        enemy.x + enemy.w > this.goku.x &&
+        enemy.y < this.goku.y + this.goku.h &&
+        enemy.h + enemy.y > this.goku.y
+      ) {
+        for (let i = 0; i < 15; i++) {
+          this.particles.push(
+            new Particle(
+              this.goku.x + this.goku.w / 2,
+              this.goku.y + this.goku.h / 2,
+              (Math.random() - 0.5) * 2,
+              (Math.random() - 0.5) * 2,
+              Math.random() * 5,
+              "#830707"
+            )
+          );
+        }
+        this.goku.hp--;
+        this.enemyPlusArr.splice(i, 1);
       }
     });
   };

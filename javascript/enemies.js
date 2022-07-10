@@ -13,8 +13,6 @@ class Enemy {
   }
 
   drawEnemy = () => {
-    // ctx.fillStyle = "blue";
-    // ctx.fillRect(this.x, this.y, this.w, this.h);
     ctx.drawImage(this.image, this.x, this.y)
   };
 
@@ -23,4 +21,27 @@ class Enemy {
     this.x = this.x + this.vx
   }
   
+}
+
+class EnemyPlus {
+  constructor(x, y, vy, src) {
+    this.x = x;
+    this.y = y;
+    this.w = 30;
+    this.h = 30;
+    this.vx = 0;
+    this.vy = vy;
+    this.hp = 4;
+    this.image = new Image();
+    this.image.src = src;
+  }
+
+  drawEnemy = () => {
+    ctx.drawImage(this.image, this.x, this.y)
+  };
+
+  updateEnemyPlus = () => {
+    this.drawEnemy()
+    this.y = this.y + this.vy
+  }
 }

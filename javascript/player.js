@@ -13,8 +13,6 @@ class Goku {
   }
 
   drawGoku = () => {
-    // ctx.fillStyle = "red";
-    // ctx.fillRect(this.x, this.y, this.w, this.h);
     ctx.drawImage(this.image, this.x, this.y);
   };
 
@@ -50,11 +48,6 @@ class GokuProjectile {
   }
 
   drawProjectile = () => {
-    // ctx.beginPath()
-    // ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2)
-    // ctx.fillStyle = "green"
-    // ctx.fill()
-    // ctx.closePath()
     ctx.drawImage(this.image, this.x, this.y, 22, 22);
   };
 
