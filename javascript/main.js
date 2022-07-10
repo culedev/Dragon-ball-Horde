@@ -8,6 +8,7 @@ const ctx = canvas.getContext("2d");
 let game;
 let deltaX;
 let deltaY;
+let frameRate = 1;
 const combatAudio = new Audio("./sounds/combatsound.webm")
 const gameOverAudio = new Audio("./sounds/gameover.webm")
 
@@ -37,19 +38,19 @@ window.addEventListener("keydown", ({ keyCode }) => {
   switch (keyCode) {
     case 87:
       game.goku.image.src = "./images/gokuup.png";
-      game.goku.vy = -2.5;
+      game.goku.vy = -2.5 * frameRate;
       break;
     case 68:
       game.goku.image.src = "./images/gokuright.png";
-      game.goku.vx = 2.5;
+      game.goku.vx = 2.5 * frameRate;
       break;
     case 83:
       game.goku.image.src = "./images/gokudown.png";
-      game.goku.vy = 2.5;
+      game.goku.vy = 2.5 * frameRate;
       break;
     case 65:
       game.goku.image.src = "./images/gokuleft.png";
-      game.goku.vx = -2.5;
+      game.goku.vx = -2.5 * frameRate;
       break;
   }
 });

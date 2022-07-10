@@ -4,7 +4,7 @@ class Enemy {
     this.y = y;
     this.w = 30;
     this.h = 30;
-    this.vx = vx;
+    this.vx = vx * frameRate;
     this.vy = 0;
     this.hp = 1;
     this.direction = 1; // 1 hacia derecha, -1 hacia izquierda
@@ -30,7 +30,7 @@ class EnemyPlus {
     this.w = 50;
     this.h = 50;
     this.vx = 0;
-    this.vy = vy;
+    this.vy = vy * frameRate;
     this.hp = 4;
     this.image = new Image();
     this.image.src = src;

@@ -39,8 +39,8 @@ class GokuProjectile {
   constructor(vx, vy) {
     this.x = game.goku.x + game.goku.w / 2;
     this.y = game.goku.y + game.goku.h / 2;
-    this.vx = vx;
-    this.vy = vy;
+    this.vx = vx * frameRate;
+    this.vy = vy * frameRate;
     this.w = 30;
     this.h = 30;
     this.image = new Image();
@@ -62,8 +62,8 @@ class GokuKiProjectile {
   constructor(vx, vy) {
     this.x = game.goku.x;
     this.y = game.goku.y - 20;
-    this.vx = vx;
-    this.vy = vy;
+    this.vx = vx * frameRate;
+    this.vy = vy * frameRate;
     this.w = 150;
     this.h = 150;
     this.image = new Image();
@@ -85,8 +85,8 @@ class Particle {
   constructor(x, y, vx, vy, radius, color) {
     this.x = x;
     this.y = y;
-    this.vx = vx;
-    this.vy = vy;
+    this.vx = vx * frameRate;
+    this.vy = vy * frameRate;
     this.w = 30;
     this.h = 30;
     this.radius = radius;

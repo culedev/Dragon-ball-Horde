@@ -21,6 +21,7 @@ class Game {
     //* 1. Limpiamos el CANVAS
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     //* 2. MOVIMIENTO Y ACCIONES
+    console.log("hola")
     this.removeProjectile();
     this.removeKiProjectile();
     // Add Enemies
