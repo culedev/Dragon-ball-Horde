@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Finlandica:ital,wght@1,500&family=Roboto+Mono:wght@500&display=swap');
 
+
 body {
   margin: 0;
   background-image: url("../images/backgroundgoku.webp");
@@ -9,6 +10,7 @@ body {
   background-color: red;
   height: 100vh;
   min-height: 100%;
+  
 }
 
 .container {
@@ -16,7 +18,8 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 100%;
+  height: 100%; 
+  z-index: 10;
 }
 /** START-SCREEN **/
 
@@ -25,7 +28,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  background-image: url("../images/kamehouse.gif"); 
+  background-image: url("../images/startscreen.gif"); 
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 10px;
@@ -36,8 +39,8 @@ body {
 
 #menu-start {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  
 }
 
 #menu-start ul {
@@ -46,7 +49,9 @@ body {
 }
 
 #menu-start li {
-  list-style: none;  
+  list-style: none;
+  margin-top: 200px;
+  margin-right: 20px;
 }
 
 .btn {
@@ -64,7 +69,7 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center; */
-  background-color: #fa8072;
+  background-color: #910232;
   color: white;
   text-shadow: 2px 2px black;
   border: 0.5px solid black;
@@ -106,9 +111,39 @@ body {
   background-color: transparent;
 }
 /** GAME-SCREEN **/
-.canvas-score-health {
+.characterUI {
   position: relative;
   display: none;
+  
+}
+
+#timer {
+  position: absolute;
+  left: 42%;
+  background-image: url("../images/woodsign.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 150px;
+  opacity: 0;
+  animation: move 7s ease-out;  
+}
+
+@keyframes move {  
+  0% {transform: translateY(-90px);
+      opacity: 0}            
+  80% {opacity: 1;}
+  
+}
+
+#timer h1 {
+  color: black;
+  font-family: "Finlandica", sans-serif;
+  font-weight: 500;
+  text-align: center;
+  font-family: "ProcreateSignature";
+  font-weight: bold;
+  
 }
 
 .ki-health {
@@ -124,12 +159,13 @@ body {
   margin-top: 10px;
   margin-left: 10px;
   border-radius: 2px;
+  box-sizing: border-box;
 }
 
 .healthbar {
   background: rgb(255, 0, 0);
   background: linear-gradient(
-    90deg,
+    90deg,w
     rgba(255, 0, 0, 1) 0%,
     rgba(122, 37, 37, 1) 0%,
     rgba(255, 0, 0, 0.7931547619047619) 42%
@@ -144,12 +180,13 @@ body {
 
 .ki {
   position: relative;
-
   border: 2px solid black;
   margin-left: 10px;
   border-radius: 2px;
   height: 10px;
   width: 150px;
+  margin-top: 2px;
+  
 }
 
 .kibar {
@@ -166,6 +203,7 @@ body {
   left: 0;
   width: 0%;
   position: absolute;
+  
 }
 
 .score {
