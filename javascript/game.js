@@ -25,9 +25,12 @@ class Game {
     this.removeProjectile();
     this.removeKiProjectile();
     // Add Enemies
+    setInterval(() => {
     this.addNewEnemiesLeft();
     this.addNewEnemiesRight();
     this.addNewEnemiesPlus();
+    }, 5000);
+    
     // Remove Enemies
     this.removeEnemyArr();
     this.removeEnemyArr2();
@@ -303,7 +306,6 @@ class Game {
       ) {
         this.popParticles(this.goku, "#830707")
         this.goku.hp -= 34;
-        console.log(this.goku.hp);
         gokuHp.style.width = this.goku.hp + "%";
         this.goku.image.src = "./images/gokureceivedmg.png";
         this.enemyArr2.splice(i, 1);
@@ -321,7 +323,6 @@ class Game {
       ) {
         this.popParticles(this.goku, "#830707")
         this.goku.hp -= 34;
-        console.log(this.goku.hp);
         gokuHp.style.width = this.goku.hp + "%";
         this.goku.image.src = "./images/gokureceivedmg.png";
         this.enemyPlusArr.splice(i, 1);

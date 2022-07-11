@@ -14,8 +14,8 @@ const gameOverAudio = new Audio("./sounds/gameover.webm");
 
 // ELEMENTOS DEL DOM
 const startScreen = document.querySelector("#start-screen");
-const startBtn = document.querySelector("#start-btn");
-const UI = document.querySelector(".canvas-score-health");
+const hordeBtn = document.querySelector("#horde-btn");
+const UI = document.querySelector(".characterUI");
 const gokuHp = document.querySelector(".healthbar");
 const gokuKi = document.querySelector(".kibar");
 const score = document.querySelector(".score span");
@@ -23,13 +23,15 @@ score.innerHTML = 0;
 const instructionScreen = document.querySelector("#instructions-screen")
 const instructionBtn = document.querySelector("#instructions-btn")
 const backBtn = document.querySelector("#back-btn")
+const timerCombat = document.querySelector("#timer h1")
+
 
 // STATE MANAGEMENT FUNCTIONS
 const startGameHorde = () => {
   startScreen.style.display = "none";
   canvas.style.display = "block";
   UI.style.display = "block";
-
+  countdownTimer()
   game = new Game();
   game.gameLoop();
 };
@@ -43,9 +45,22 @@ const instructions = () => {
 
 }
 
+const countdownTimer = () => {
+  let firstInterval = setInterval (() => {
+    if (Number(timerCombat.innerHTML) > 1) {    
+      timerCombat.innerHTML--     
+    } else {
+      timerCombat.innerHTML = "FIGHT" 
+    }
+  }, 1000)
+  setTimeout(() => {
+    clearInterval(firstInterval)
+  }, 6000);
+
+}
 
 // ADDEVENTLISTENER
-startBtn.addEventListener("click", startGameHorde);
+hordeBtn.addEventListener("click", startGameHorde);
 instructionBtn.addEventListener("click", instructions);
 backBtn.addEventListener("click", backMenu)
 // Move on keydown
