@@ -10,17 +10,17 @@ class Enemy {
     this.direction = 1; // 1 hacia derecha, -1 hacia izquierda
     this.image = new Image();
     this.image.src = src;
+
   }
 
   drawEnemy = () => {
-    ctx.drawImage(this.image, this.x, this.y)
+    ctx.drawImage(this.image, this.x, this.y);
   };
 
   updateEnemy = () => {
-    this.drawEnemy()
-    this.x = this.x + this.vx
-  }
-  
+    this.drawEnemy();
+    this.x = this.x + this.vx;
+  };
 }
 
 class EnemyPlus {
@@ -37,11 +37,11 @@ class EnemyPlus {
   }
 
   drawEnemy = () => {
-    ctx.drawImage(this.image, this.x, this.y, 50, 50)
+    ctx.drawImage(this.image, this.x, this.y, 50, 50);
   };
 
   updateEnemyPlus = () => {
-    this.drawEnemy()
-    this.y = this.y + this.vy
-  }
+    this.drawEnemy();
+    this.y = this.y + this.vy;
+  };
 }

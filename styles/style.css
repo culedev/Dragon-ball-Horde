@@ -1,10 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Finlandica:ital,wght@1,500&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Finlandica:ital,wght@1,500&family=Roboto+Mono:wght@500&display=swap');
 
 body {
   margin: 0;
-  background-image: url('../images/backgroundgoku.webp'); 
-  background-repeat: no-repeat;
-  background-size: cover; 
+  background-image: url("../images/backgroundgoku.webp");
+  /* background-repeat: no-repeat;
+  background-size: cover; */
   user-select: none;
   background-color: red;
   height: 100vh;
@@ -16,22 +16,95 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-
   height: 100%;
 }
+/** START-SCREEN **/
 
 #start-screen {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-evenly;
+  background-image: url("../images/kamehouse.gif"); 
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 10px;
+  width: 800px;
+  height: 600px;
+  position: relative;
 }
 
-#start-screen button {
-    width: 30%;
-    height: 30px;
-    border-radius: 3px solid orange;
+#menu-start {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+#menu-start ul {
+  margin-top: 30px;
+  
+}
+
+#menu-start li {
+  list-style: none;  
+}
+
+.btn {
+  width: 130px;
+  height: 40px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+  border-radius: 5px;
+  font-family: 'Roboto Mono', monospace;;
+  font-weight: 1000;
+  font-size: 13px;
+  text-align: center;
+  /* background-image: url("../images/gradient2.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center; */
+  background-color: #fa8072;
+  color: white;
+  text-shadow: 2px 2px black;
+  border: 0.5px solid black;
+  box-shadow: 0.2em 0.2em rgb(80, 45, 4);
+}
+
+/** INSTRUCTIONS-SCREEN **/
+
+#instructions-screen {
+  display: none;
+  flex-direction: column;
+  align-items: left;
+  position: absolute;
+  background-image: url("../images/gradient2.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 10px;
+  width: 530px;
+  height: 530px;
+}
+
+#instructions-screen ul li{
+ display: flex;
+ align-items: center;
+ font-family: 'Roboto Mono', monospace;
+ font-size: 18px;
+}
+
+#instructions-screen ul li img {
+  margin-right: 10px;
+}
+
+#instructions-screen ul li p {
+  text-align: justify;
+}
+
+#instructions-screen .btn {
+  background-image: none;
+  background-color: transparent;
+}
 /** GAME-SCREEN **/
 .canvas-score-health {
   position: relative;
@@ -86,14 +159,13 @@ body {
     rgba(255, 0, 0, 1) 0%,
     rgba(38, 53, 102, 1) 0%,
     rgba(4, 10, 175, 0.7931547619047619) 42%
-  ); 
+  );
   top: 0;
   bottom: 0;
   right: 0;
   left: 0;
   width: 0%;
   position: absolute;
-  
 }
 
 .score {

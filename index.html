@@ -1,43 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles/style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+    />
     <title>DRAGON BALL HORDE</title>
-</head>
-<body>
-    
+  </head>
+  <body>
     <div class="container">
+      <div id="start-screen">
+        <img src="./images/titulo-start.png" alt="title" width="500px" />
+        <!-- <button id="start-btn"></button> -->
+        <ul id="menu-start">
+          <li><button id="start-btn" class="btn">CAMPAIGN</button></li>
+          <li><button id="horde-btn" class="btn">HORDE</button></li>
+          <li><button id="instructions-btn" class="btn">INSTRUCTIONS</button></li>
+          <li><button id="options-btn" class="btn">OPTIONS</button></li>
+        </ul>
+      </div>
 
-        <div id="start-screen">
-            <img src="./images/titulo-start.png" alt="title" width="500px">
-            <button id="start-btn">START</button>
+      <div id="instructions-screen">
+        <ul>
+          <li><img src="./images/wasd2.png" alt="" width="120px"><p>USE IT TO MOVE!</p></li>
+          <li><img src="./images/Qkey.png" alt="" width="40px"><p>USE IT CHARGE YOUR KI!</p></li>
+          <li><img src="./images/leftclick.png" alt="" width="50px"><p>LAUNCH KI BURST!</p></li>
+          <li><img src="./images/rightclick.png" alt="" width="50px"><p>LAUNCH SPECIAL ATTACK!</p></li>
+          <li><img src="./images/freezer.png" alt=""><p>ELIMINATE FREEZER TO EARN 1 POINT!</p></li>
+          <li><img src="./images/cooler2.png" alt=""><p>ELIMINATE COOLER TO EARN 10 POINTS!</p></li>
+          <li><p>&nbsp RECOVER HP EACH 50 POINTS EARNED!</p></li>
+          <li><button class="btn" id="back-btn">BACK</button></li>
+        </ul>
+      </div>
+
+      <div class="canvas-score-health">
+        <div class="ki-health">
+          <div class="health">
+            <div class="healthbar"></div>
+          </div>
+          <div class="ki">
+            <div class="kibar"></div>
+          </div>
         </div>
-
-        <div class="canvas-score-health">
-            <div class="ki-health">              
-                <div class="health">
-                    <div class="healthbar"></div> 
-                </div>
-                <div class="ki">
-                    <div class="kibar"></div>
-                </div>
-            </div>
-            <div class="score">
-                <img src="/images/SCORE1.png" alt="SCORE"><span>100</span>
-            </div>
-            <canvas id="canvas" width="800" height="600"></canvas>            
+        <div class="score">
+          <img src="/images/SCORE1.png" alt="SCORE" /><span>100</span>
         </div>
-
-
-    </div>    
+        <canvas id="canvas" width="800" height="600"></canvas>
+      </div>
+    </div>
     <!--SCRIPTS HERE, DONT TOUCH THIS-->
     <script src="./javascript/main.js"></script>
     <script src="./javascript/game.js"></script>
     <script src="./javascript/player.js"></script>
     <script src="./javascript/enemies.js"></script>
-</body>
+  </body>
 </html>

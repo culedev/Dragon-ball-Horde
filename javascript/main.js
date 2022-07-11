@@ -9,8 +9,8 @@ let game;
 let deltaX;
 let deltaY;
 let frameRate = 1;
-const combatAudio = new Audio("./sounds/combatsound.webm")
-const gameOverAudio = new Audio("./sounds/gameover.webm")
+const combatAudio = new Audio("./sounds/combatsound.webm");
+const gameOverAudio = new Audio("./sounds/gameover.webm");
 
 // ELEMENTOS DEL DOM
 const startScreen = document.querySelector("#start-screen");
@@ -18,11 +18,14 @@ const startBtn = document.querySelector("#start-btn");
 const UI = document.querySelector(".canvas-score-health");
 const gokuHp = document.querySelector(".healthbar");
 const gokuKi = document.querySelector(".kibar");
-const score = document.querySelector(".score span")
+const score = document.querySelector(".score span");
 score.innerHTML = 0;
+const instructionScreen = document.querySelector("#instructions-screen")
+const instructionBtn = document.querySelector("#instructions-btn")
+const backBtn = document.querySelector("#back-btn")
 
 // STATE MANAGEMENT FUNCTIONS
-const startGame = () => {
+const startGameHorde = () => {
   startScreen.style.display = "none";
   canvas.style.display = "block";
   UI.style.display = "block";
@@ -31,8 +34,20 @@ const startGame = () => {
   game.gameLoop();
 };
 
+const backMenu = () => {
+  instructionScreen.style.display = "none"
+}
+
+const instructions = () => {
+  instructionScreen.style.display = "flex"
+
+}
+
+
 // ADDEVENTLISTENER
-startBtn.addEventListener("click", startGame);
+startBtn.addEventListener("click", startGameHorde);
+instructionBtn.addEventListener("click", instructions);
+backBtn.addEventListener("click", backMenu)
 // Move on keydown
 window.addEventListener("keydown", ({ keyCode }) => {
   switch (keyCode) {
