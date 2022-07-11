@@ -1,16 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Finlandica:ital,wght@1,500&family=Roboto+Mono:wght@500&display=swap');
 
-
 body {
   margin: 0;
   background-image: url("../images/backgroundgoku.webp");
-  /* background-repeat: no-repeat;
-  background-size: cover; */
   user-select: none;
   background-color: red;
   height: 100vh;
   min-height: 100%;
-  
+  cursor: url("../images/cursor.png"), auto;
 }
 
 .container {
@@ -19,7 +16,7 @@ body {
   align-items: center;
   flex-direction: column;
   height: 100%; 
-  z-index: 10;
+
 }
 /** START-SCREEN **/
 
@@ -57,7 +54,7 @@ body {
 .btn {
   width: 130px;
   height: 40px;
-  cursor: pointer;
+  cursor: url("../images/cursor.png"), auto;
   transition: all 0.3s ease;
   margin-top: 10px;
   border-radius: 5px;
@@ -65,15 +62,18 @@ body {
   font-weight: 1000;
   font-size: 13px;
   text-align: center;
-  /* background-image: url("../images/gradient2.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center; */
   background-color: #910232;
   color: white;
   text-shadow: 2px 2px black;
   border: 0.5px solid black;
   box-shadow: 0.2em 0.2em rgb(80, 45, 4);
+}
+
+.btn:hover {
+  background-color: white;
+  color: #910232;
+  text-shadow: none;
+  transform: scale(1.15);
 }
 
 /** INSTRUCTIONS-SCREEN **/
@@ -89,6 +89,7 @@ body {
   border-radius: 10px;
   width: 530px;
   height: 530px;
+  box-shadow: 0.2em 0.2em rgb(80, 45, 4);
 }
 
 #instructions-screen ul li{
@@ -224,4 +225,5 @@ body {
   display: none;
   border-radius: 5px;
   border: 3px solid orange;
+  
 }
