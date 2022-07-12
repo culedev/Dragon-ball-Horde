@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles/style.css" />
-    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
     <title>DRAGON BALL HORDE</title>
   </head>
   <body>
@@ -17,22 +17,49 @@
         <ul id="menu-start">
           <li><button id="start-btn" class="btn">CAMPAIGN</button></li>
           <li><button id="horde-btn" class="btn">HORDE</button></li>
-          <li><button id="instructions-btn" class="btn">INSTRUCTIONS</button></li>
+          <li>
+            <button id="instructions-btn" class="btn">INSTRUCTIONS</button>
+          </li>
           <li><button id="options-btn" class="btn">OPTIONS</button></li>
         </ul>
       </div>
 
       <div id="instructions-screen">
         <ul>
-          <li><img src="./images/wasd2.png" alt="" width="120px"><p>USE IT TO MOVE!</p></li>
-          <li><img src="./images/Qkey.png" alt="" width="40px"><p>USE IT CHARGE YOUR KI!</p></li>
-          <li><img src="./images/leftclick.png" alt="" width="50px"><p>LAUNCH KI BURST!</p></li>
-          <li><img src="./images/rightclick.png" alt="" width="50px"><p>LAUNCH SPECIAL ATTACK!</p></li>
-          <li><img src="./images/freezer.png" alt=""><p>ELIMINATE FREEZER TO EARN 1 POINT!</p></li>
-          <li><img src="./images/cooler2.png" alt=""><p>ELIMINATE COOLER TO EARN 10 POINTS!</p></li>
+          <li>
+            <img src="./images/wasd2.png" alt="" width="120px" />
+            <p>USE IT TO MOVE!</p>
+          </li>
+          <li>
+            <img src="./images/Qkey.png" alt="" width="40px" />
+            <p>USE IT CHARGE YOUR KI!</p>
+          </li>
+          <li>
+            <img src="./images/leftclick.png" alt="" width="50px" />
+            <p>LAUNCH KI BURST!</p>
+          </li>
+          <li>
+            <img src="./images/rightclick.png" alt="" width="50px" />
+            <p>LAUNCH SPECIAL ATTACK!</p>
+          </li>
+          <li>
+            <img src="./images/freezer.png" alt="" />
+            <p>ELIMINATE FREEZER TO EARN 1 POINT!</p>
+          </li>
+          <li>
+            <img src="./images/cooler2.png" alt="" />
+            <p>ELIMINATE COOLER TO EARN 10 POINTS!</p>
+          </li>
           <li><p>&nbsp RECOVER HP EACH 50 POINTS EARNED!</p></li>
-          <li><button class="btn back-btn">BACK</button></li>
+          <li><button class="btn back-btn">BACK TO MENU</button></li>
         </ul>
+      </div>
+
+      <div id="options-screen">
+        <h1>GAME SOUND IS INSANE</h1>
+        <h2>DONT MUTE IT!</h2>
+        <button class="btn" id="mute-btn">DONT PUSH IT</button>
+        <button class="btn back-btn">BACK TO MENU</button>
       </div>
       <!-- GAME SCREEN -->
       <div class="characterUI">
@@ -51,18 +78,14 @@
         </div>
         <div class="score">
           <img src="/images/SCORE1.png" alt="SCORE" /><span>100</span>
-        </div>        
+        </div>
         <canvas id="canvas" width="800" height="600"></canvas>
       </div>
       <!-- FINISH SCREEN -->
       <div id="gameover-screen">
         <h1>GAME OVER</h1>
-        <ol><h3>SCORE RANKING!</h3>
-          <li>.................</li>
-          <li>.................</li>
-          <li>.................</li>
-          <li>.................</li>
-          <li>.................</li>
+        <ol id="score-ranking">
+          <h3>RANKING!</h3>
         </ol>
         <div id="gameover-btns">
           <button id="playagain" class="btn">PLAY AGAIN!</button>

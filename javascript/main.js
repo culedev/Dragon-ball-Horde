@@ -9,9 +9,13 @@ let game;
 let deltaX;
 let deltaY;
 let frameRate = 1;
+let scorePoints;
+
+const startScreenAudio = new Audio("./images/introAudio.webm");
 const combatAudio = new Audio("./sounds/combatsound.webm");
 const gameOverAudio = new Audio("./sounds/gameover.webm");
-
+const finalAudio = new Audio("../images/musicafinal.webm");
+startScreenAudio.play();
 // ELEMENTOS DEL DOM
 const startScreen = document.querySelector("#start-screen");
 const hordeBtn = document.querySelector("#horde-btn");
@@ -27,6 +31,24 @@ const timerCombat = document.querySelector("#timer h1");
 const gameOverScreen = document.querySelector("#gameover-screen");
 const playAgain = document.querySelector("#playagain");
 const timerAnimation = document.querySelector("#timer");
+const olDOM = document.querySelector("#score-ranking");
+const optionBtn = document.querySelector("#options-btn");
+const optionScreen = document.querySelector("#options-screen");
+const muteBtn = document.querySelector("#mute-btn");
+// STATE MANAGEMENT FUNCTIONS
+const startGameHorde = () => {
+  restartGame();
+  startScreen.style.display = "none";
+  canvas.style.display = "block";
+  UI.style.display = "block";
+  gameOverScreen.style.display = "none";
+  startScreenAudio.pause();
+  countdownTimer();
+
+  game = new Game();
+  game.gameLoop();
+};
+
 const restartGame = () => {
   timerAnimation.style.animation = "none";
   timerAnimation.offsetHeight;
@@ -36,34 +58,44 @@ const restartGame = () => {
   gokuHp.style.width = 100 + "%";
   gokuKi.style.width = 0 + "%";
   combatAudio.load();
-  combatAudio.play()
-};
-
-// STATE MANAGEMENT FUNCTIONS
-const startGameHorde = () => {
-  restartGame();
-  startScreen.style.display = "none";
-  canvas.style.display = "block";
-  UI.style.display = "block";
-  gameOverScreen.style.display = "none";
-  
-  countdownTimer();
-
-  game = new Game();
-  game.gameLoop();
+  combatAudio.play();
+  finalAudio.load();
+  finalAudio.pause();
+  startScreenAudio.load();
 };
 
 const backMenu = () => {
-  
   startScreen.style.display = "flex";
   instructionScreen.style.display = "none";
   canvas.style.display = "none";
   UI.style.display = "none";
   gameOverScreen.style.display = "none";
+  optionScreen.style.display = "none";
+  startScreenAudio.play();
+  finalAudio.load();
+  finalAudio.pause();
 };
 
 const instructions = () => {
   instructionScreen.style.display = "flex";
+};
+
+const options = () => {
+  optionScreen.style.display = "flex";
+};
+
+const muteAll = (event) => {
+  if (startScreenAudio.muted) {
+    startScreenAudio.muted = false;
+    combatAudio.muted = false;
+    finalAudio.muted = false;
+    event.target.innerHTML = "DONT PUSH IT";
+  } else {
+    combatAudio.muted = true;
+    startScreenAudio.muted = true;
+    finalAudio.muted = true;
+    event.target.innerHTML = "UNMUTE ME NOW!";
+  }
 };
 
 const countdownTimer = () => {
@@ -80,9 +112,21 @@ const countdownTimer = () => {
   }, 6000);
 };
 
+const printScore = () => {
+  finalAudio.play();
+  if (game.isGameOn === false) {
+    let li = document.createElement("li");
+    li.innerHTML =
+      prompt("Enter your name") + " " + `${Number(scorePoints)}Pts`;
+    olDOM.append(li);
+  }
+};
+
 // ADDEVENTLISTENER
 hordeBtn.addEventListener("click", startGameHorde);
 instructionBtn.addEventListener("click", instructions);
+optionBtn.addEventListener("click", options);
+muteBtn.addEventListener("click", muteAll);
 backBtn.forEach((btn) => {
   btn.addEventListener("click", backMenu);
 });

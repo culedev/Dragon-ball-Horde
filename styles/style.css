@@ -86,6 +86,7 @@ body {
   width: 530px;
   height: 530px;
   box-shadow: 0.2em 0.2em rgb(80, 45, 4);
+  animation: move 1s ease-in;
 }
 
 #instructions-screen ul li {
@@ -108,6 +109,38 @@ body {
   background-color: transparent;
 }
 
+/** OPTIONS SCREEN **/
+
+#options-screen {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  background-image: url("../images/gradient2.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 10px;
+  width: 530px;
+  height: 430px;
+  box-shadow: 0.2em 0.2em rgb(80, 45, 4);
+  animation: move 1s ease-in-out;
+}
+
+#options-screen h1,
+h2 {
+  font-family: "Roboto Mono", monospace;
+  color: #910232;
+}
+
+#options-screen .back-btn {
+  background-color: transparent;
+  margin-top: 70px;
+}
+
+#mute-btn {
+  margin-top: 40px;
+}
+
 /** GAME-SCREEN **/
 .characterUI {
   position: relative;
@@ -125,16 +158,6 @@ body {
   opacity: 0;
   animation: move 7s ease-in-out;
 }
-
-/* @keyframes move {
-  0% {
-    transform: translateY(-90px);
-    opacity: 0;
-  }
-  80% {
-    opacity: 1;
-  }
-} */
 
 #timer h1 {
   color: black;
@@ -241,20 +264,37 @@ body {
   animation: move 2s ease-in-out;
 }
 
-#gameover-screen h1, h3 {
+#gameover-screen h1,
+h3 {
   color: #910232;
   text-shadow: 1px 1px black;
+  margin-left: px;
 }
 
-#gameover-screen ol {
-  margin-right: 30px;
+#gameover-screen ol h3 {
+  margin-left: 20px;
+}
+
+#gameover-screen li {
+  text-align: center;
+  list-style-type: none;
+  margin-right: 50px;
+  margin-bottom: 5px;
+}
+
+#gameover-screen li::before {
+  content: "»  ";
+}
+
+#gameover-screen li::after {
+  content: "  «";
 }
 
 #gameover-screen button {
   margin-right: 20px;
 }
 
-/* @keyframes move {
+@keyframes move {
   0% {
     transform: translateY(-90px);
     opacity: 0;
@@ -262,5 +302,4 @@ body {
   80% {
     opacity: 1;
   }
-} */
-
+}
