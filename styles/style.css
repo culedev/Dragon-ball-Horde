@@ -241,7 +241,20 @@ body {
   animation: move 2s ease-in-out;
 }
 
-@keyframes move {
+#gameover-screen h1, h3 {
+  color: #910232;
+  text-shadow: 1px 1px black;
+}
+
+#gameover-screen ol {
+  margin-right: 30px;
+}
+
+#gameover-screen button {
+  margin-right: 20px;
+}
+
+/* @keyframes move {
   0% {
     transform: translateY(-90px);
     opacity: 0;
@@ -249,8 +262,5 @@ body {
   80% {
     opacity: 1;
   }
-}
+} */
 
-#timer {
-  z-index: 2;
-}

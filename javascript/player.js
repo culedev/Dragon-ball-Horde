@@ -22,15 +22,19 @@ class Goku {
     this.x += this.vx;
     this.y += this.vy;
 
-    if (this.x + this.w + this.vx > canvas.width) {
-      this.vx = 0;
+    if (this.x + this.w > canvas.width) {
+      this.x = canvas.width - 30;
+      
     } else if (this.x < 0) {
-      this.vx = 0;
+      this.x = 1;
+      
     }
-    if (this.y + this.h > 550) {
-      this.vy = 0;
-    } else if (this.y < 10) {
-      this.vy = 0;
+    if (this.y + this.h > canvas.height) {
+      this.y = canvas.height - 40
+      
+    } else if (this.y < 0) {
+      this.y = 1
+      
     }
   };
 }
