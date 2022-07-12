@@ -24,18 +24,29 @@ const instructionScreen = document.querySelector("#instructions-screen");
 const instructionBtn = document.querySelector("#instructions-btn");
 const backBtn = document.querySelectorAll(".back-btn");
 const timerCombat = document.querySelector("#timer h1");
-const gameOverScreen = document.querySelector("#gameover-screen")
-const playAgain = document.querySelector("#playagain")
-const timerAnimation = document.querySelector("#timer")
+const gameOverScreen = document.querySelector("#gameover-screen");
+const playAgain = document.querySelector("#playagain");
+const timerAnimation = document.querySelector("#timer");
+const restartGame = () => {
+  timerAnimation.style.animation = "none";
+  timerAnimation.offsetHeight;
+  timerAnimation.style.animation = null;
+  timerAnimation.style.animation = "move 7s ease-in-out"; // las lineas anteriores resetean animacion
+  score.innerHTML = 0;
+  gokuHp.style.width = 100 + "%";
+  gokuKi.style.width = 0 + "%";
+  combatAudio.load();
+  combatAudio.play()
+};
 
 // STATE MANAGEMENT FUNCTIONS
 const startGameHorde = () => {
+  restartGame();
   startScreen.style.display = "none";
   canvas.style.display = "block";
   UI.style.display = "block";
-  gameOverScreen.style.display = "none"
-  timerAnimation.style.animation = "move 7s ease-in-out"
-
+  gameOverScreen.style.display = "none";
+  
   countdownTimer();
 
   game = new Game();
@@ -43,12 +54,12 @@ const startGameHorde = () => {
 };
 
 const backMenu = () => {
+  
   startScreen.style.display = "flex";
   instructionScreen.style.display = "none";
-  canvas.style.display = "none"
-  UI.style.display = "none"
-  gameOverScreen.style.display = "none"
-  
+  canvas.style.display = "none";
+  UI.style.display = "none";
+  gameOverScreen.style.display = "none";
 };
 
 const instructions = () => {
@@ -56,6 +67,7 @@ const instructions = () => {
 };
 
 const countdownTimer = () => {
+  timerCombat.innerHTML = 5;
   let firstInterval = setInterval(() => {
     if (Number(timerCombat.innerHTML) > 1) {
       timerCombat.innerHTML--;
@@ -71,10 +83,10 @@ const countdownTimer = () => {
 // ADDEVENTLISTENER
 hordeBtn.addEventListener("click", startGameHorde);
 instructionBtn.addEventListener("click", instructions);
-backBtn.forEach( btn => {
+backBtn.forEach((btn) => {
   btn.addEventListener("click", backMenu);
-})
-playAgain.addEventListener("click", startGameHorde)
+});
+playAgain.addEventListener("click", startGameHorde);
 // Move on keydown
 window.addEventListener("keydown", ({ keyCode }) => {
   switch (keyCode) {

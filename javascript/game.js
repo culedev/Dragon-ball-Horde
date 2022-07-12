@@ -331,7 +331,7 @@ class Game {
   };
   // RECOVER HP
   recoverHp = () => {
-    if (this.goku.hp < 85 && Number(score.innerHTML) % 50 === 0) {
+    if (this.goku.hp < 85 && Number(score.innerHTML) % 50 === 0 && Number(score.innerHTML) > 0) {
       this.goku.hp += 10;
       gokuHp.style.width = this.goku.hp + "%";
     }
@@ -344,12 +344,13 @@ class Game {
       this.goku.vy = 0;
       this.goku.image.src = "./images/gokudeath.png";
       setInterval(() => {
-        this.goku.image.src = "./images/gokudeath.png";
-        combatAudio.pause();     
+        this.goku.image.src = "./images/gokudeath.png";    
         this.isGameOn = false;
       }, 500);
+      combatAudio.pause();
       gameOverAudio.play();
       gameOverScreen.style.display = "flex"
+      
     }
   };
 
