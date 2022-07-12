@@ -20,49 +20,61 @@ const gokuHp = document.querySelector(".healthbar");
 const gokuKi = document.querySelector(".kibar");
 const score = document.querySelector(".score span");
 score.innerHTML = 0;
-const instructionScreen = document.querySelector("#instructions-screen")
-const instructionBtn = document.querySelector("#instructions-btn")
-const backBtn = document.querySelector("#back-btn")
-const timerCombat = document.querySelector("#timer h1")
-
+const instructionScreen = document.querySelector("#instructions-screen");
+const instructionBtn = document.querySelector("#instructions-btn");
+const backBtn = document.querySelectorAll(".back-btn");
+const timerCombat = document.querySelector("#timer h1");
+const gameOverScreen = document.querySelector("#gameover-screen")
+const playAgain = document.querySelector("#playagain")
+const timerAnimation = document.querySelector("#timer")
 
 // STATE MANAGEMENT FUNCTIONS
 const startGameHorde = () => {
   startScreen.style.display = "none";
   canvas.style.display = "block";
   UI.style.display = "block";
-  countdownTimer()
+  gameOverScreen.style.display = "none"
+  timerAnimation.style.animation = "move 7s ease-in-out"
+
+  countdownTimer();
+
   game = new Game();
   game.gameLoop();
 };
 
 const backMenu = () => {
-  instructionScreen.style.display = "none"
-}
+  startScreen.style.display = "flex";
+  instructionScreen.style.display = "none";
+  canvas.style.display = "none"
+  UI.style.display = "none"
+  gameOverScreen.style.display = "none"
+  
+};
 
 const instructions = () => {
-  instructionScreen.style.display = "flex"
-
-}
+  instructionScreen.style.display = "flex";
+};
 
 const countdownTimer = () => {
-  let firstInterval = setInterval (() => {
-    if (Number(timerCombat.innerHTML) > 1) {    
-      timerCombat.innerHTML--     
+  let firstInterval = setInterval(() => {
+    if (Number(timerCombat.innerHTML) > 1) {
+      timerCombat.innerHTML--;
     } else {
-      timerCombat.innerHTML = "FIGHT" 
+      timerCombat.innerHTML = "FIGHT";
     }
-  }, 1000)
+  }, 1000);
   setTimeout(() => {
-    clearInterval(firstInterval)
+    clearInterval(firstInterval);
   }, 6000);
-
-}
+};
 
 // ADDEVENTLISTENER
 hordeBtn.addEventListener("click", startGameHorde);
 instructionBtn.addEventListener("click", instructions);
-backBtn.addEventListener("click", backMenu)
+backBtn.forEach( btn => {
+  btn.addEventListener("click", backMenu);
+})
+playAgain.addEventListener("click", startGameHorde)
 // Move on keydown
 window.addEventListener("keydown", ({ keyCode }) => {
   switch (keyCode) {
@@ -88,19 +100,19 @@ window.addEventListener("keydown", ({ keyCode }) => {
 window.addEventListener("keyup", ({ keyCode }) => {
   switch (keyCode) {
     case 87:
-      game.goku.image.src = "../images/gokuIddle.png";
+      game.goku.image.src = "./images/gokuIddle.png";
       game.goku.vy = 0;
       break;
     case 68:
-      game.goku.image.src = "../images/gokuIddle.png";
+      game.goku.image.src = "./images/gokuIddle.png";
       game.goku.vx = 0;
       break;
     case 83:
-      game.goku.image.src = "../images/gokuIddle.png";
+      game.goku.image.src = "./images/gokuIddle.png";
       game.goku.vy = 0;
       break;
     case 65:
-      game.goku.image.src = "../images/gokuIddle.png";
+      game.goku.image.src = "./images/gokuIddle.png";
       game.goku.vx = 0;
       break;
   }

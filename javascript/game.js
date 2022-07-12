@@ -26,11 +26,11 @@ class Game {
     this.removeKiProjectile();
     // Add Enemies
     setInterval(() => {
-    this.addNewEnemiesLeft();
-    this.addNewEnemiesRight();
-    this.addNewEnemiesPlus();
+      this.addNewEnemiesLeft();
+      this.addNewEnemiesRight();
+      this.addNewEnemiesPlus();
     }, 5000);
-    
+
     // Remove Enemies
     this.removeEnemyArr();
     this.removeEnemyArr2();
@@ -52,7 +52,7 @@ class Game {
     // GAME OVER!!!
     this.gameOver();
     // AUDIOS
-    combatAudio.play();
+    // combatAudio.play();
     // * 3. DIBUJAR ELEMENTOS
     ctx.drawImage(this.bg, 0, 0, canvas.width, canvas.height);
     this.goku.updatePlayer();
@@ -87,7 +87,7 @@ class Game {
     //* 4. EFECTO RECURSION
     if (this.isGameOn === true) {
       requestAnimationFrame(this.gameLoop);
-    }
+    } 
   };
 
   // REMOVE PROJECTILES
@@ -178,7 +178,7 @@ class Game {
           enemy.y < projectile.y + projectile.h &&
           enemy.h + enemy.y > projectile.y
         ) {
-          this.popParticles(enemy, "#730797")
+          this.popParticles(enemy, "#730797");
           this.gokuProjectile.splice(i, 1);
           this.enemyArr.splice(j, 1);
           score.innerHTML++;
@@ -196,7 +196,7 @@ class Game {
           enemy.y < projectile.y + projectile.h &&
           enemy.h + enemy.y > projectile.y
         ) {
-          this.popParticles(enemy, "#730797")
+          this.popParticles(enemy, "#730797");
           this.gokuProjectile.splice(i, 1);
           this.enemyArr2.splice(j, 1);
           score.innerHTML++;
@@ -214,7 +214,7 @@ class Game {
           enemy.y < projectile.y + projectile.h &&
           enemy.h + enemy.y > projectile.y
         ) {
-          this.popParticles(enemy, "#730797")
+          this.popParticles(enemy, "#730797");
           enemy.hp--;
           this.gokuProjectile.splice(i, 1);
           if (enemy.hp === 0) {
@@ -234,7 +234,7 @@ class Game {
           enemy.y < projectile.y + projectile.h &&
           enemy.h + enemy.y > projectile.y
         ) {
-          this.popParticles(enemy, "#730797")
+          this.popParticles(enemy, "#730797");
           this.enemyArr.splice(j, 1);
           score.innerHTML++;
         }
@@ -251,7 +251,7 @@ class Game {
           enemy.y < projectile.y + projectile.h &&
           enemy.h + enemy.y > projectile.y
         ) {
-          this.popParticles(enemy, "#730797")
+          this.popParticles(enemy, "#730797");
           this.enemyArr2.splice(j, 1);
           score.innerHTML++;
         }
@@ -268,7 +268,7 @@ class Game {
           enemy.y < projectile.y + projectile.h &&
           enemy.h + enemy.y > projectile.y
         ) {
-          this.popParticles(enemy, "#730797")
+          this.popParticles(enemy, "#730797");
           enemy.hp--;
           if (enemy.hp === 0) {
             this.enemyPlusArr.splice(j, 1);
@@ -287,8 +287,8 @@ class Game {
         enemy.y < this.goku.y + this.goku.h &&
         enemy.h + enemy.y > this.goku.y
       ) {
-        this.popParticles(this.goku, "#830707")
-        this.goku.hp -= 34;        
+        this.popParticles(this.goku, "#830707");
+        this.goku.hp -= 34;
         gokuHp.style.width = this.goku.hp + "%";
         this.goku.image.src = "./images/gokureceivedmg.png";
         this.enemyArr.splice(i, 1);
@@ -304,7 +304,7 @@ class Game {
         enemy.y < this.goku.y + this.goku.h &&
         enemy.h + enemy.y > this.goku.y
       ) {
-        this.popParticles(this.goku, "#830707")
+        this.popParticles(this.goku, "#830707");
         this.goku.hp -= 34;
         gokuHp.style.width = this.goku.hp + "%";
         this.goku.image.src = "./images/gokureceivedmg.png";
@@ -321,7 +321,7 @@ class Game {
         enemy.y < this.goku.y + this.goku.h &&
         enemy.h + enemy.y > this.goku.y
       ) {
-        this.popParticles(this.goku, "#830707")
+        this.popParticles(this.goku, "#830707");
         this.goku.hp -= 34;
         gokuHp.style.width = this.goku.hp + "%";
         this.goku.image.src = "./images/gokureceivedmg.png";
@@ -345,10 +345,11 @@ class Game {
       this.goku.image.src = "./images/gokudeath.png";
       setInterval(() => {
         this.goku.image.src = "./images/gokudeath.png";
-        combatAudio.pause();
+        combatAudio.pause();     
         this.isGameOn = false;
       }, 500);
       gameOverAudio.play();
+      gameOverScreen.style.display = "flex"
     }
   };
 
@@ -365,5 +366,5 @@ class Game {
         )
       );
     }
-  }
+  };
 }

@@ -10,6 +10,7 @@
   </head>
   <body>
     <div class="container">
+      <!-- START SCREEN -->
       <div id="start-screen">
         <img src="./images/titulo-start.png" alt="title" width="500px" />
         <!-- <button id="start-btn"></button> -->
@@ -30,10 +31,10 @@
           <li><img src="./images/freezer.png" alt=""><p>ELIMINATE FREEZER TO EARN 1 POINT!</p></li>
           <li><img src="./images/cooler2.png" alt=""><p>ELIMINATE COOLER TO EARN 10 POINTS!</p></li>
           <li><p>&nbsp RECOVER HP EACH 50 POINTS EARNED!</p></li>
-          <li><button class="btn" id="back-btn">BACK</button></li>
+          <li><button class="btn back-btn">BACK</button></li>
         </ul>
       </div>
-
+      <!-- GAME SCREEN -->
       <div class="characterUI">
         <div class="ki-health">
           <div class="health">
@@ -50,8 +51,23 @@
         </div>
         <div class="score">
           <img src="/images/SCORE1.png" alt="SCORE" /><span>100</span>
-        </div>
+        </div>        
         <canvas id="canvas" width="800" height="600"></canvas>
+      </div>
+      <!-- FINISH SCREEN -->
+      <div id="gameover-screen">
+        <h1>GAME OVER</h1>
+        <ol><h3>SCORE RANKING!</h3>
+          <li>.................</li>
+          <li>.................</li>
+          <li>.................</li>
+          <li>.................</li>
+          <li>.................</li>
+        </ol>
+        <div id="gameover-btns">
+          <button id="playagain" class="btn">PLAY AGAIN!</button>
+          <button class="btn back-btn">BACK TO MENU</button>
+        </div>
       </div>
     </div>
     <!--SCRIPTS HERE, DONT TOUCH THIS-->
