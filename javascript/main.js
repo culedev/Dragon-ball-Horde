@@ -10,12 +10,15 @@ let deltaX;
 let deltaY;
 let frameRate = 1;
 let scorePoints;
+const storage = window.localStorage;
 
+// AUDIOS
 const startScreenAudio = new Audio("./images/introAudio.webm");
 const combatAudio = new Audio("./sounds/combatsound.webm");
 const gameOverAudio = new Audio("./sounds/gameover.webm");
 const finalAudio = new Audio("../images/musicafinal.webm");
 startScreenAudio.play();
+
 // ELEMENTOS DEL DOM
 const startScreen = document.querySelector("#start-screen");
 const hordeBtn = document.querySelector("#horde-btn");
@@ -35,6 +38,7 @@ const olDOM = document.querySelector("#score-ranking");
 const optionBtn = document.querySelector("#options-btn");
 const optionScreen = document.querySelector("#options-screen");
 const muteBtn = document.querySelector("#mute-btn");
+
 // STATE MANAGEMENT FUNCTIONS
 const startGameHorde = () => {
   restartGame();
@@ -43,12 +47,13 @@ const startGameHorde = () => {
   UI.style.display = "block";
   gameOverScreen.style.display = "none";
   startScreenAudio.pause();
+  loadScore();
   countdownTimer();
 
   game = new Game();
   game.gameLoop();
 };
-
+// Restart DOM + AUDIOS
 const restartGame = () => {
   timerAnimation.style.animation = "none";
   timerAnimation.offsetHeight;
@@ -58,12 +63,14 @@ const restartGame = () => {
   gokuHp.style.width = 100 + "%";
   gokuKi.style.width = 0 + "%";
   combatAudio.load();
-  combatAudio.play();
+  setTimeout(() => {
+    combatAudio.play();
+  }, 4300);
   finalAudio.load();
   finalAudio.pause();
   startScreenAudio.load();
 };
-
+// Backmenu btn
 const backMenu = () => {
   startScreen.style.display = "flex";
   instructionScreen.style.display = "none";
@@ -75,15 +82,15 @@ const backMenu = () => {
   finalAudio.load();
   finalAudio.pause();
 };
-
+// Instruction Windows
 const instructions = () => {
   instructionScreen.style.display = "flex";
 };
-
+// Options window
 const options = () => {
   optionScreen.style.display = "flex";
 };
-
+// Mute all audios
 const muteAll = (event) => {
   if (startScreenAudio.muted) {
     startScreenAudio.muted = false;
@@ -97,7 +104,7 @@ const muteAll = (event) => {
     event.target.innerHTML = "UNMUTE ME NOW!";
   }
 };
-
+// Cuenta atras combate
 const countdownTimer = () => {
   timerCombat.innerHTML = 5;
   let firstInterval = setInterval(() => {
@@ -112,13 +119,50 @@ const countdownTimer = () => {
   }, 6000);
 };
 
+const sortStorage = () => {
+  const sortedStorage = [];
+
+  Object.keys(storage).forEach((key) => {
+    const storageObj = JSON.parse(storage.getItem(key));
+    sortedStorage.push(storageObj);
+  });
+
+  sortedStorage.sort((a, b) => {
+    if (a.score < b.score) {
+      return 1;
+    } else if (a.score > b.score) {
+      return -1;
+    } else {
+      return 0;
+    }
+  });
+
+  return sortedStorage.splice(0, 5);
+};
+
+// load ol cada vez que se inicia el juego
+const loadScore = () => {
+  olDOM.innerHTML = "";
+  const sortedStorage = sortStorage();
+
+  sortedStorage.forEach((scoreItem) => {
+    const li = document.createElement("li");
+    li.innerHTML = `${scoreItem.name}: ${scoreItem.score} Pts`;
+    olDOM.append(li);
+  });
+};
+
+// Ranking score
 const printScore = () => {
   finalAudio.play();
   if (game.isGameOn === false) {
-    let li = document.createElement("li");
-    li.innerHTML =
-      prompt("Enter your name") + " " + `${Number(scorePoints)}Pts`;
-    olDOM.append(li);
+    const name = prompt("Enter your name") || "Yamcha";
+    const score = Number(scorePoints);
+    localStorage.setItem(
+      localStorage.length + 1,
+      JSON.stringify({ name: name, score: score })
+    );
+    loadScore();
   }
 };
 

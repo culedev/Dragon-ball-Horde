@@ -51,8 +51,7 @@ class Game {
     this.recoverHp();
     // GAME OVER!!!
     this.gameOver();
-    // AUDIOS
-    // combatAudio.play();
+    scorePoints = score.innerHTML;
     // * 3. DIBUJAR ELEMENTOS
     ctx.drawImage(this.bg, 0, 0, canvas.width, canvas.height);
     this.goku.updatePlayer();
@@ -83,7 +82,7 @@ class Game {
       }
       particle.updateParticle();
     });
-    scorePoints = score.innerHTML;
+    
     //* 4. EFECTO RECURSION
     if (this.isGameOn === true) {
       requestAnimationFrame(this.gameLoop);
@@ -357,7 +356,7 @@ class Game {
       printScore();
     }
   };
-
+  // Bucle particulas
   popParticles = (character, color) => {
     for (let i = 0; i < 15; i++) {
       this.particles.push(
