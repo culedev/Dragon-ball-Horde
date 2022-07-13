@@ -16,7 +16,7 @@ const storage = window.localStorage;
 const startScreenAudio = new Audio("./images/introAudio.webm");
 const combatAudio = new Audio("./sounds/combatsound.webm");
 const gameOverAudio = new Audio("./sounds/gameover.webm");
-const finalAudio = new Audio("../images/musicafinal.webm");
+const finalAudio = new Audio("./images/musicafinal.webm");
 startScreenAudio.play();
 
 // ELEMENTOS DEL DOM

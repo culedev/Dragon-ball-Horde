@@ -1,7 +1,6 @@
 # DRAGON HORDE
 
-## [See the Game](www.your-url-here.com)
-NOTE: above link will be added later
+## [See the Game](https://culedev.github.io/game-project/)
 
 # Description
 

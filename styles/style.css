@@ -284,7 +284,15 @@ h3 {
 
 #gameover-screen li {
   text-align: center;
-  list-style-image: url("../images/ballresize.png");
+  list-style: none;
+}
+
+#gameover-screen li::before {
+  content: "»  ";
+}
+
+#gameover-screen li::after {
+  content: "  «";
 }
 
 #gameover-btns{
