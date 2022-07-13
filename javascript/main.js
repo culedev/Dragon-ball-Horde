@@ -8,7 +8,7 @@ const ctx = canvas.getContext("2d");
 let game;
 let deltaX;
 let deltaY;
-let frameRate = 1;
+let frameRate = 0;
 let scorePoints;
 const storage = window.localStorage;
 
