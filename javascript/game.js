@@ -16,7 +16,41 @@ class Game {
     this.particles = [];
 
     this.isGameOn = true;
+
+    this.frames = 0;
+    this.startTime = performance.now();
+    this.FPSNormal = 0;
   }
+
+  calculateFPSNormal = () => {
+    let t = performance.now();
+    let dt = t - this.startTime;
+
+    // if elapsed time is greater than 1s
+    if (dt > 1000) {
+      // calculate the frames drawn over the period of time
+      this.FPSNormal = (this.frames * 1000) / dt;
+
+      // and restart the values
+      this.frames = 0;
+      this.startTime = t;
+    }
+    this.frames++;
+
+    if (this.FPSNormal > 130 && this.FPSNormal < 160) {
+      this.FPSNormal = 143;
+    }
+    if (this.FPSNormal > 50 && this.FPSNormal < 70) {
+      this.FPSNormal = 60;
+      console.log(this.FPSNormal);
+    }
+    if (this.FPSNormal > 100 && this.FPSNormal < 129) {
+      this.FPSNormal = 120;
+    }
+
+    frameRate = 143 / this.FPSNormal;
+    console.log(frameRate);
+  };
 
   gameLoop = () => {
     //* 1. Limpiamos el CANVAS
@@ -30,7 +64,6 @@ class Game {
       this.addNewEnemiesRight();
       this.addNewEnemiesPlus();
     }, 5000);
-
     // Remove Enemies
     this.removeEnemyArr();
     this.removeEnemyArr2();
@@ -82,6 +115,8 @@ class Game {
       }
       particle.updateParticle();
     });
+
+    this.calculateFPSNormal();
 
     //* 4. EFECTO RECURSION
     if (this.isGameOn === true) {
