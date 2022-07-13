@@ -6,7 +6,7 @@ class Broly {
       this.h = 40;
       this.vx = 0;
       this.vy = 0.4 * frameRate;
-      this.hp = 10;
+      this.hp = 50;
       this.image = new Image();
       this.image.src = "./images/brolybajando.png";
     }

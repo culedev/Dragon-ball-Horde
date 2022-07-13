@@ -101,7 +101,7 @@ class Game {
       this.gokuEnemyRightCollision();
       this.gokuEnemyPlusCollision();
 
-      if (Number(score.innerHTML) >= 2) {
+      if (Number(score.innerHTML) >= 50) {
         this.isGameOn = false;
         setTimeout(() => {
           canvas.style.display = "none";
