@@ -26,6 +26,15 @@ const kiAudio = new Audio(
 const evilLaugh = new Audio("./sounds/evillaugh.webm");
 const destructionAudio = new Audio("./sounds/destructionsound.webm");
 const brolyKi = new Audio("./sounds/kiblast2.mp3");
+startScreenAudio.volume = 0.1
+combatAudio.volume = 0.1
+gameOverAudio.volume = 0.1
+finalAudio.volume = 0.1
+saiyanAudio.volume = 0.1
+kiAudio.volume = 0.1
+evilLaugh.volume = 0.1
+destructionAudio.volume = 0.1
+brolyKi.volume = 0.1
 startScreenAudio.play();
 
 // ELEMENTOS DEL DOM

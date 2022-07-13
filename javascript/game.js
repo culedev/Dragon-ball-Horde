@@ -208,9 +208,10 @@ class Game {
 
   // ADD NEW ENEMIES
   addNewEnemiesLeft = () => {
-    let randomPosY = Math.random() * 600;
+    let randomPosY = Math.random() * 600;  
     let newEnemieLeft = new Enemy(0, randomPosY, 2, "./images/freezer.png");
-
+  
+  
     if (
       this.enemyArr.length < 3 ||
       this.enemyArr[this.enemyArr.length - 3].x > canvas.width * 0.3
@@ -221,12 +222,23 @@ class Game {
 
   addNewEnemiesRight = () => {
     let newRandomPosY = Math.random() * 600;
-    let newEnemieRight = new Enemy(
-      canvas.width,
-      newRandomPosY,
-      -2,
-      "./images/freezervolt.png"
-    );
+    let newEnemieRight;
+    if (this.level === 0) {
+     newEnemieRight = new Enemy(
+        canvas.width,
+        newRandomPosY,
+        -2,
+        "./images/freezervolt.png"
+      );
+    }
+    if (this.level === 1) {
+      newEnemieRight = new Enemy(
+        canvas.width,
+        newRandomPosY,
+        -1.4,
+        "./images/freezervolt.png"
+      );
+    }
 
     if (
       this.enemyArr2.length < 3 ||
@@ -238,12 +250,25 @@ class Game {
 
   addNewEnemiesPlus = () => {
     let newRandomPosX = Math.random() * 600;
-    let newEnemiePlus = new EnemyPlus(
-      newRandomPosX,
-      0,
-      2,
-      "./images/cooler.png"
-    );
+    let newEnemiePlus;
+    
+    if (this.level === 0) {
+      newEnemiePlus = new EnemyPlus(
+        newRandomPosX,
+        0,
+        2,
+        "./images/cooler.png"
+      )
+     }
+     if (this.level === 1) {
+      newEnemiePlus = new EnemyPlus(
+        newRandomPosX,
+        0,
+        1.4,
+        "./images/cooler.png"
+      )
+     } 
+    
     setInterval(() => {
       if (
         this.enemyPlusArr.length < 2 ||
