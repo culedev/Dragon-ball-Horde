@@ -86,6 +86,7 @@ class Game {
       this.gokuEnemyRightCollision();
       this.gokuEnemyPlusCollision();
     }
+    //* LEVEL 1
     if (this.level === 1) {
       setInterval(() => {
         this.addNewEnemiesRight();
@@ -112,12 +113,14 @@ class Game {
         evilLaugh.play();
       }
     }
+    //* LEVEL 2
     if (this.level === 2) {
       this.removeBrolyProjectile();
       this.addNewBrolyProjectiles();
       this.brolyProjectileCollisionGoku();
       this.gokuProjectileCollisionBroly();
-      this.winner();
+      this.KiCollisionBroly();
+      
     }
 
     // Recover HP
@@ -134,6 +137,7 @@ class Game {
       this.brolyProjectile.forEach((projectile) => {
         projectile.updateProjectile();
       });
+      this.winner();
     }
     // forEach PROJECTILE
     this.gokuProjectile.forEach((projectile) => {
@@ -517,7 +521,7 @@ class Game {
         this.broly.y < projectile.y + projectile.h &&
         this.broly.h + this.broly.y > projectile.y
       ) {
-        this.popParticles(this.broly, "#730797");
+        this.popParticles(this.broly, "#830707");
         this.gokuKiProjectile.splice(i, 1);
         this.broly.hp = this.broly.hp - 20;
       }
@@ -525,8 +529,19 @@ class Game {
   };
 
   winner = () => {
-    if (this.broly.hp <= 0) {
-      console.log("YOU WIN!");
+    if (this.broly.hp <= 0) {        
+      this.goku.image.src = "./images/gokuwin.png"
+      this.broly.image.src = "./images/Broly 42 (1).png"
+      setTimeout(() => {
+        this.isGameOn = false;      
+      }, 500);
+      setTimeout(() => {
+        canvas.style.display = "none";
+        UI.style.display = "none";
+        winnerScreen.style.display = "flex";
+      }, 3000);
+      combatAudio.pause();
+      finalAudio.play();
     }
   };
 }

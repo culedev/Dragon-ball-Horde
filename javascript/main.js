@@ -13,15 +13,19 @@ let scorePoints;
 const storage = window.localStorage;
 
 // AUDIOS
-const startScreenAudio = new Audio("./images/introAudio.webm");
+const startScreenAudio = new Audio("../sounds/introAudio.webm");
 const combatAudio = new Audio("./sounds/combatsound.webm");
 const gameOverAudio = new Audio("./sounds/gameover.webm");
-const finalAudio = new Audio("./images/musicafinal.webm");
-const saiyanAudio = new Audio("./sounds/SAIYAN AURA - Sound effect [TubeRipper.com].webm")
-const kiAudio = new Audio("./sounds/Dragon Ball Z Huge Ki Blast Sound Effect [TubeRipper.com].webm")
-const evilLaugh = new Audio("./sounds/evillaugh.webm")
-const destructionAudio = new Audio("./sounds/destructionsound.webm")
-const brolyKi = new Audio("../sounds/kiblast2.mp3")
+const finalAudio = new Audio("../sounds/musicafinal.webm");
+const saiyanAudio = new Audio(
+  "./sounds/SAIYAN AURA - Sound effect [TubeRipper.com].webm"
+);
+const kiAudio = new Audio(
+  "./sounds/Dragon Ball Z Huge Ki Blast Sound Effect [TubeRipper.com].webm"
+);
+const evilLaugh = new Audio("./sounds/evillaugh.webm");
+const destructionAudio = new Audio("./sounds/destructionsound.webm");
+const brolyKi = new Audio("../sounds/kiblast2.mp3");
 startScreenAudio.play();
 
 // ELEMENTOS DEL DOM
@@ -43,9 +47,10 @@ const olDOM = document.querySelector("#score-ranking");
 const optionBtn = document.querySelector("#options-btn");
 const optionScreen = document.querySelector("#options-screen");
 const muteBtn = document.querySelector("#mute-btn");
-const campaignBtn = document.querySelector("#start-btn")
-const interludeScreen = document.querySelector("#interlude")
-const continueBtn = document.querySelector("#interlude-btn")
+const campaignBtn = document.querySelector("#start-btn");
+const interludeScreen = document.querySelector("#interlude");
+const continueBtn = document.querySelector("#interlude-btn");
+const winnerScreen = document.querySelector("#winner-screen");
 
 // STATE MANAGEMENT FUNCTIONS
 const startGameHorde = () => {
@@ -74,7 +79,7 @@ const startCampaign = () => {
 
   game = new Game(1);
   game.gameLoop();
-}
+};
 // Restart DOM + AUDIOS
 const restartGame = () => {
   timerAnimation.style.animation = "none";
@@ -99,10 +104,10 @@ const continueInterlude = () => {
   UI.style.display = "block";
   gameOverScreen.style.display = "none";
   interludeScreen.style.display = "none";
-  
+
   game = new Game(2);
   game.gameLoop();
-}
+};
 // Backmenu btn
 const backMenu = () => {
   startScreen.style.display = "flex";
@@ -111,6 +116,7 @@ const backMenu = () => {
   UI.style.display = "none";
   gameOverScreen.style.display = "none";
   optionScreen.style.display = "none";
+  winnerScreen.style.display = "none";
   startScreenAudio.play();
   finalAudio.load();
   finalAudio.pause();
@@ -199,9 +205,21 @@ const printScore = () => {
   }
 };
 
+const playagainSelect = () => {
+  if (game.level === 0) {
+    startGameHorde();
+  }
+  if (game.level === 1) {
+    startCampaign();
+  }
+  if (game.level === 2) {
+    continueInterlude();
+  }
+};
+
 // ADDEVENTLISTENER
-campaignBtn.addEventListener("click", startCampaign)
-continueBtn.addEventListener("click", continueInterlude)
+campaignBtn.addEventListener("click", startCampaign);
+continueBtn.addEventListener("click", continueInterlude);
 hordeBtn.addEventListener("click", startGameHorde);
 instructionBtn.addEventListener("click", instructions);
 optionBtn.addEventListener("click", options);
@@ -209,7 +227,8 @@ muteBtn.addEventListener("click", muteAll);
 backBtn.forEach((btn) => {
   btn.addEventListener("click", backMenu);
 });
-playAgain.addEventListener("click", startGameHorde);
+playAgain.addEventListener("click", playagainSelect);
+
 // Move on keydown
 window.addEventListener("keydown", ({ keyCode }) => {
   switch (keyCode) {
@@ -280,7 +299,7 @@ canvas.addEventListener("click", (event) => {
 window.addEventListener("keydown", ({ keyCode }) => {
   if (keyCode === 81 && game.goku.ki < 100) {
     game.goku.image.src = "./images/gokuKI.png";
-    saiyanAudio.play()
+    saiyanAudio.play();
     game.goku.vy = 0;
     game.goku.vx = 0;
 
@@ -292,8 +311,8 @@ window.addEventListener("keydown", ({ keyCode }) => {
 window.addEventListener("keyup", ({ keyCode }) => {
   if (keyCode === 81) {
     game.goku.image.src = "./images/gokuIddle.png";
-    saiyanAudio.load()
-    saiyanAudio.pause()
+    saiyanAudio.load();
+    saiyanAudio.pause();
   }
 });
 //EVENT RIGHT CLICK -> KI ATTACK!
@@ -310,7 +329,7 @@ canvas.addEventListener("contextmenu", (event) => {
 
   if (game.goku.ki >= 100) {
     game.goku.image.src = "./images/gokuposeattack2.png";
-    kiAudio.play()
+    kiAudio.play();
     game.gokuKiProjectile.push(newProjectile);
     game.goku.ki = 0;
     gokuKi.style.width = 0 + "%";

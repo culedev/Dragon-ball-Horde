@@ -314,7 +314,7 @@ h3 {
   align-items: center;
   justify-content: center;
   position: absolute;
-  background-color: black;
+  background-color: transparent;
   width: 480px;
   height: 480px;
   font-family: "Roboto Mono", monospace;
@@ -324,6 +324,29 @@ h3 {
 
 #interlude h1 {
   color: #910232;
+}
+
+#winner-screen {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  background-image: url("../images/gradient2.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 10px;
+  width: 480px;
+  height: 480px;
+  box-shadow: 0.2em 0.2em rgb(80, 45, 4);
+  font-family: "Roboto Mono", monospace;
+  opacity: 1;
+  animation: move 4s ease-in-out;
+}
+
+#winner-screen h1,h3 {
+  color: #910232;
+  text-shadow: 1px 1px black;
 }
 
 @keyframes move {
