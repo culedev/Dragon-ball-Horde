@@ -3,6 +3,8 @@
 body {
   margin: 0;
   background-image: url("../images/backgroundgoku.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
   user-select: none;
   background-color: red;
   height: 100vh;

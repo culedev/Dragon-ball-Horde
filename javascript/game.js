@@ -82,7 +82,7 @@ class Game {
       }
       particle.updateParticle();
     });
-    
+
     //* 4. EFECTO RECURSION
     if (this.isGameOn === true) {
       requestAnimationFrame(this.gameLoop);
