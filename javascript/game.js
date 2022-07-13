@@ -1,10 +1,15 @@
 // ELEMENTOS QUE AFECTAN AL JUEGO
 
 class Game {
-  constructor() {
+  constructor(level) {
     this.goku = new Goku();
     this.bg = new Image();
-    this.bg.src = "./images/Scene1.jpg";
+    if (level === 0 || level === 1) {
+      this.bg.src = "./images/Scene1.jpg";
+    } else {
+      this.bg.src = "./images/Scene2.jpg";
+    }
+    this.broly = new Broly(700, 0);
 
     this.enemyArr = [];
     this.enemyArr2 = [];
@@ -12,10 +17,12 @@ class Game {
 
     this.gokuProjectile = [];
     this.gokuKiProjectile = [];
+    this.brolyProjectile = [];
 
     this.particles = [];
 
     this.isGameOn = true;
+    this.level = level;
 
     this.frames = 0;
     this.startTime = performance.now();
@@ -42,14 +49,11 @@ class Game {
     }
     if (this.FPSNormal > 50 && this.FPSNormal < 70) {
       this.FPSNormal = 60;
-      console.log(this.FPSNormal);
     }
     if (this.FPSNormal > 100 && this.FPSNormal < 129) {
       this.FPSNormal = 120;
     }
-
     frameRate = 143 / this.FPSNormal;
-    console.log(frameRate);
   };
 
   gameLoop = () => {
@@ -59,27 +63,63 @@ class Game {
     this.removeProjectile();
     this.removeKiProjectile();
     // Add Enemies
-    setInterval(() => {
-      this.addNewEnemiesLeft();
-      this.addNewEnemiesRight();
-      this.addNewEnemiesPlus();
-    }, 5000);
-    // Remove Enemies
-    this.removeEnemyArr();
-    this.removeEnemyArr2();
-    this.removeEnemyPlusArr();
-    // Projectile collision enemies
-    this.projectileCollisionEnemyLeft();
-    this.projectileCollisionEnemyRight();
-    this.projectileCollisionEnemyPlus();
-    // Projectile KI collision enemies
-    this.KiCollisionEnemyLeft();
-    this.KiCollisionEnemyRight();
-    this.KiCollisionEnemyPlus();
-    // Character collision enemies
-    this.gokuEnemyLeftCollision();
-    this.gokuEnemyRightCollision();
-    this.gokuEnemyPlusCollision();
+    if (this.level === 0) {
+      setInterval(() => {
+        this.addNewEnemiesLeft();
+        this.addNewEnemiesRight();
+        this.addNewEnemiesPlus();
+      }, 5000);
+      // Remove Enemies
+      this.removeEnemyArr();
+      this.removeEnemyArr2();
+      this.removeEnemyPlusArr();
+      // Projectile collision enemies
+      this.projectileCollisionEnemyLeft();
+      this.projectileCollisionEnemyRight();
+      this.projectileCollisionEnemyPlus();
+      // Projectile KI collision enemies
+      this.KiCollisionEnemyLeft();
+      this.KiCollisionEnemyRight();
+      this.KiCollisionEnemyPlus();
+      // Character collision enemies
+      this.gokuEnemyLeftCollision();
+      this.gokuEnemyRightCollision();
+      this.gokuEnemyPlusCollision();
+    }
+    if (this.level === 1) {
+      setInterval(() => {
+        this.addNewEnemiesRight();
+        this.addNewEnemiesPlus();
+      }, 5000);
+      this.removeEnemyArr2();
+      this.removeEnemyPlusArr();
+      this.projectileCollisionEnemyRight();
+      this.projectileCollisionEnemyPlus();
+      this.KiCollisionEnemyRight();
+      this.KiCollisionEnemyPlus();
+      this.gokuEnemyRightCollision();
+      this.gokuEnemyPlusCollision();
+
+      if (Number(score.innerHTML) >= 2) {
+        this.isGameOn = false;
+        setTimeout(() => {
+          canvas.style.display = "none";
+          UI.style.display = "none";
+          interludeScreen.style.display = "flex";
+          destructionAudio.play();
+        }, 5000);
+        combatAudio.pause();
+        evilLaugh.play();
+      }
+    }
+    if (this.level === 2) {
+      this.removeBrolyProjectile();
+      this.addNewBrolyProjectiles();
+      this.brolyProjectileCollisionGoku();
+      this.gokuProjectileCollisionBroly();
+      this.winner();
+    }
+
     // Recover HP
     this.recoverHp();
     // GAME OVER!!!
@@ -88,6 +128,13 @@ class Game {
     // * 3. DIBUJAR ELEMENTOS
     ctx.drawImage(this.bg, 0, 0, canvas.width, canvas.height);
     this.goku.updatePlayer();
+    // LEVEL 2
+    if (this.level === 2) {
+      this.broly.updateEnemy();
+      this.brolyProjectile.forEach((projectile) => {
+        projectile.updateProjectile();
+      });
+    }
     // forEach PROJECTILE
     this.gokuProjectile.forEach((projectile) => {
       projectile.updateProjectile();
@@ -404,6 +451,82 @@ class Game {
           color
         )
       );
+    }
+  };
+
+  //* Broly methods
+  addNewBrolyProjectiles = () => {
+    let randomVX = (Math.random() - 1.5) * 2.2;
+    let randomVY = (Math.random() - 0.5) * 2.2;
+    setTimeout(() => {
+      let newBrolyProjectile = new BrolyProjectile(randomVX, randomVY);
+      if (
+        this.brolyProjectile.length < 4 ||
+        this.brolyProjectile[this.brolyProjectile.length - 4].x <
+          canvas.width * 0.4
+      ) {
+        brolyKi.play();
+        this.brolyProjectile.push(newBrolyProjectile);
+      }
+    }, 5000);
+  };
+
+  brolyProjectileCollisionGoku = () => {
+    this.brolyProjectile.forEach((projectile, i) => {
+      if (
+        this.goku.x < projectile.x + projectile.w &&
+        this.goku.x + this.goku.w > projectile.x &&
+        this.goku.y < projectile.y + projectile.h &&
+        this.goku.h + this.goku.y > projectile.y
+      ) {
+        this.popParticles(this.goku, "#830707");
+        this.brolyProjectile.splice(i, 1);
+        this.goku.hp -= 33;
+        gokuHp.style.width = this.goku.hp + "%";
+        this.goku.image.src = "./images/gokureceivedmg.png";
+      }
+    });
+  };
+
+  removeBrolyProjectile = () => {
+    if (this.brolyProjectile.length > 15) {
+      this.brolyProjectile.shift();
+    }
+  };
+
+  gokuProjectileCollisionBroly = () => {
+    this.gokuProjectile.forEach((projectile, i) => {
+      if (
+        this.broly.x < projectile.x + projectile.w &&
+        this.broly.x + this.broly.w > projectile.x &&
+        this.broly.y < projectile.y + projectile.h &&
+        this.broly.h + this.broly.y > projectile.y
+      ) {
+        this.popParticles(this.broly, "#830707");
+        this.gokuProjectile.splice(i, 1);
+        this.broly.hp--;
+      }
+    });
+  };
+
+  KiCollisionBroly = () => {
+    this.gokuKiProjectile.forEach((projectile, i) => {
+      if (
+        this.broly.x < projectile.x + projectile.w &&
+        this.broly.x + this.broly.w > projectile.x &&
+        this.broly.y < projectile.y + projectile.h &&
+        this.broly.h + this.broly.y > projectile.y
+      ) {
+        this.popParticles(this.broly, "#730797");
+        this.gokuKiProjectile.splice(i, 1);
+        this.broly.hp = this.broly.hp - 20;
+      }
+    });
+  };
+
+  winner = () => {
+    if (this.broly.hp <= 0) {
+      console.log("YOU WIN!");
     }
   };
 }

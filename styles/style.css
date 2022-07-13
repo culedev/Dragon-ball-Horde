@@ -308,6 +308,24 @@ h3 {
   animation: move 4s ease-in;
 }
 
+#interlude {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  background-color: black;
+  width: 480px;
+  height: 480px;
+  font-family: "Roboto Mono", monospace;
+  opacity: 1;
+  animation: move 4s ease-in-out;
+}
+
+#interlude h1 {
+  color: #910232;
+}
+
 @keyframes move {
   0% {
     transform: translateY(-90px);
@@ -317,3 +335,4 @@ h3 {
     opacity: 1;
   }
 }
+

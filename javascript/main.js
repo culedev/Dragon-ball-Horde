@@ -17,6 +17,11 @@ const startScreenAudio = new Audio("./images/introAudio.webm");
 const combatAudio = new Audio("./sounds/combatsound.webm");
 const gameOverAudio = new Audio("./sounds/gameover.webm");
 const finalAudio = new Audio("./images/musicafinal.webm");
+const saiyanAudio = new Audio("./sounds/SAIYAN AURA - Sound effect [TubeRipper.com].webm")
+const kiAudio = new Audio("./sounds/Dragon Ball Z Huge Ki Blast Sound Effect [TubeRipper.com].webm")
+const evilLaugh = new Audio("./sounds/evillaugh.webm")
+const destructionAudio = new Audio("./sounds/destructionsound.webm")
+const brolyKi = new Audio("../sounds/kiblast2.mp3")
 startScreenAudio.play();
 
 // ELEMENTOS DEL DOM
@@ -38,6 +43,9 @@ const olDOM = document.querySelector("#score-ranking");
 const optionBtn = document.querySelector("#options-btn");
 const optionScreen = document.querySelector("#options-screen");
 const muteBtn = document.querySelector("#mute-btn");
+const campaignBtn = document.querySelector("#start-btn")
+const interludeScreen = document.querySelector("#interlude")
+const continueBtn = document.querySelector("#interlude-btn")
 
 // STATE MANAGEMENT FUNCTIONS
 const startGameHorde = () => {
@@ -50,9 +58,23 @@ const startGameHorde = () => {
   loadScore();
   countdownTimer();
 
-  game = new Game();
+  game = new Game(0);
   game.gameLoop();
 };
+
+const startCampaign = () => {
+  restartGame();
+  startScreen.style.display = "none";
+  canvas.style.display = "block";
+  UI.style.display = "block";
+  gameOverScreen.style.display = "none";
+  startScreenAudio.pause();
+  loadScore();
+  countdownTimer();
+
+  game = new Game(1);
+  game.gameLoop();
+}
 // Restart DOM + AUDIOS
 const restartGame = () => {
   timerAnimation.style.animation = "none";
@@ -70,6 +92,17 @@ const restartGame = () => {
   finalAudio.pause();
   startScreenAudio.load();
 };
+
+const continueInterlude = () => {
+  restartGame();
+  canvas.style.display = "block";
+  UI.style.display = "block";
+  gameOverScreen.style.display = "none";
+  interludeScreen.style.display = "none";
+  
+  game = new Game(2);
+  game.gameLoop();
+}
 // Backmenu btn
 const backMenu = () => {
   startScreen.style.display = "flex";
@@ -167,6 +200,8 @@ const printScore = () => {
 };
 
 // ADDEVENTLISTENER
+campaignBtn.addEventListener("click", startCampaign)
+continueBtn.addEventListener("click", continueInterlude)
 hordeBtn.addEventListener("click", startGameHorde);
 instructionBtn.addEventListener("click", instructions);
 optionBtn.addEventListener("click", options);
@@ -245,11 +280,20 @@ canvas.addEventListener("click", (event) => {
 window.addEventListener("keydown", ({ keyCode }) => {
   if (keyCode === 81 && game.goku.ki < 100) {
     game.goku.image.src = "./images/gokuKI.png";
+    saiyanAudio.play()
     game.goku.vy = 0;
     game.goku.vx = 0;
 
     game.goku.ki = game.goku.ki + 2;
     gokuKi.style.width = game.goku.ki + "%";
+  }
+});
+
+window.addEventListener("keyup", ({ keyCode }) => {
+  if (keyCode === 81) {
+    game.goku.image.src = "./images/gokuIddle.png";
+    saiyanAudio.load()
+    saiyanAudio.pause()
   }
 });
 //EVENT RIGHT CLICK -> KI ATTACK!
@@ -266,6 +310,7 @@ canvas.addEventListener("contextmenu", (event) => {
 
   if (game.goku.ki >= 100) {
     game.goku.image.src = "./images/gokuposeattack2.png";
+    kiAudio.play()
     game.gokuKiProjectile.push(newProjectile);
     game.goku.ki = 0;
     gokuKi.style.width = 0 + "%";
