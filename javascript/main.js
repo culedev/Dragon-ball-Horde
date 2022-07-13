@@ -13,10 +13,10 @@ let scorePoints;
 const storage = window.localStorage;
 
 // AUDIOS
-const startScreenAudio = new Audio("../sounds/introAudio.webm");
+const startScreenAudio = new Audio("./sounds/introAudio.webm");
 const combatAudio = new Audio("./sounds/combatsound.webm");
 const gameOverAudio = new Audio("./sounds/gameover.webm");
-const finalAudio = new Audio("../sounds/musicafinal.webm");
+const finalAudio = new Audio("./sounds/musicafinal.webm");
 const saiyanAudio = new Audio(
   "./sounds/SAIYAN AURA - Sound effect [TubeRipper.com].webm"
 );
@@ -25,7 +25,7 @@ const kiAudio = new Audio(
 );
 const evilLaugh = new Audio("./sounds/evillaugh.webm");
 const destructionAudio = new Audio("./sounds/destructionsound.webm");
-const brolyKi = new Audio("../sounds/kiblast2.mp3");
+const brolyKi = new Audio("./sounds/kiblast2.mp3");
 startScreenAudio.play();
 
 // ELEMENTOS DEL DOM
