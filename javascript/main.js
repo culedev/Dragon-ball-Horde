@@ -26,15 +26,15 @@ const kiAudio = new Audio(
 const evilLaugh = new Audio("./sounds/evillaugh.webm");
 const destructionAudio = new Audio("./sounds/destructionsound.webm");
 const brolyKi = new Audio("./sounds/kiblast2.mp3");
-startScreenAudio.volume = 0.1
-combatAudio.volume = 0.1
-gameOverAudio.volume = 0.1
-finalAudio.volume = 0.1
-saiyanAudio.volume = 0.1
-kiAudio.volume = 0.1
-evilLaugh.volume = 0.1
-destructionAudio.volume = 0.1
-brolyKi.volume = 0.1
+startScreenAudio.volume = 0.1;
+combatAudio.volume = 0.1;
+gameOverAudio.volume = 0.1;
+finalAudio.volume = 0.1;
+saiyanAudio.volume = 0.1;
+kiAudio.volume = 0.1;
+evilLaugh.volume = 0.1;
+destructionAudio.volume = 0.1;
+brolyKi.volume = 0.1;
 startScreenAudio.play();
 
 // ELEMENTOS DEL DOM
@@ -60,6 +60,8 @@ const campaignBtn = document.querySelector("#start-btn");
 const interludeScreen = document.querySelector("#interlude");
 const continueBtn = document.querySelector("#interlude-btn");
 const winnerScreen = document.querySelector("#winner-screen");
+const brolyHpBar = document.querySelector("#broly-hp-bar");
+const brolyHp = document.querySelector("#broly-hp");
 
 // STATE MANAGEMENT FUNCTIONS
 const startGameHorde = () => {
@@ -98,6 +100,7 @@ const restartGame = () => {
   score.innerHTML = 0;
   gokuHp.style.width = 100 + "%";
   gokuKi.style.width = 0 + "%";
+  brolyHpBar.style.width = 100 + "%";
   combatAudio.load();
   setTimeout(() => {
     combatAudio.play();
@@ -113,7 +116,7 @@ const continueInterlude = () => {
   UI.style.display = "block";
   gameOverScreen.style.display = "none";
   interludeScreen.style.display = "none";
-
+  brolyHp.style.display = "block";
   game = new Game(2);
   game.gameLoop();
 };
@@ -123,6 +126,7 @@ const backMenu = () => {
   instructionScreen.style.display = "none";
   canvas.style.display = "none";
   UI.style.display = "none";
+  brolyHp.style.display = "none";
   gameOverScreen.style.display = "none";
   optionScreen.style.display = "none";
   winnerScreen.style.display = "none";

@@ -4,7 +4,7 @@
 
 # Description
 
-Are you ready to save the world? It's time to defeat freezer & cooler!
+Are you ready to save the world? It's time to defeat freezer & cooler! And... who knows...
 
 # Main Functionalities
 
@@ -24,10 +24,5 @@ Are you ready to save the world? It's time to defeat freezer & cooler!
 
 ## enemies.js
 
-# States and Transitions
+## finalBoss.js
 
-## start-screen
-
-## game-screen
-
-## playagain-screen

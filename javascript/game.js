@@ -23,10 +23,11 @@ class Game {
 
     this.isGameOn = true;
     this.level = level;
+    this.time = 0;
 
     this.frames = 0;
     this.startTime = performance.now();
-    this.FPSNormal = 0;
+    this.FPSNormal = 1;
   }
 
   calculateFPSNormal = () => {
@@ -57,6 +58,9 @@ class Game {
   };
 
   gameLoop = () => {
+    if (this.FPSNormal > 1) {
+      this.time += 1 / this.FPSNormal;
+    }
     //* 1. Limpiamos el CANVAS
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     //* 2. MOVIMIENTO Y ACCIONES
@@ -64,11 +68,11 @@ class Game {
     this.removeKiProjectile();
     // Add Enemies
     if (this.level === 0) {
-      setInterval(() => {
+      if (this.time > 4) {
         this.addNewEnemiesLeft();
         this.addNewEnemiesRight();
         this.addNewEnemiesPlus();
-      }, 5000);
+      }
       // Remove Enemies
       this.removeEnemyArr();
       this.removeEnemyArr2();
@@ -88,10 +92,10 @@ class Game {
     }
     //* LEVEL 1
     if (this.level === 1) {
-      setInterval(() => {
+      if (this.time > 4) {
         this.addNewEnemiesRight();
         this.addNewEnemiesPlus();
-      }, 5000);
+      }
       this.removeEnemyArr2();
       this.removeEnemyPlusArr();
       this.projectileCollisionEnemyRight();
@@ -101,8 +105,9 @@ class Game {
       this.gokuEnemyRightCollision();
       this.gokuEnemyPlusCollision();
 
-      if (Number(score.innerHTML) >= 50) {
+      if (Number(score.innerHTML) >= 30) {
         this.isGameOn = false;
+        
         setTimeout(() => {
           canvas.style.display = "none";
           UI.style.display = "none";
@@ -120,7 +125,6 @@ class Game {
       this.brolyProjectileCollisionGoku();
       this.gokuProjectileCollisionBroly();
       this.KiCollisionBroly();
-      
     }
 
     // Recover HP
@@ -137,6 +141,7 @@ class Game {
       this.brolyProjectile.forEach((projectile) => {
         projectile.updateProjectile();
       });
+      brolyHp.classList.add("brolyhp");
       this.winner();
     }
     // forEach PROJECTILE
@@ -208,10 +213,9 @@ class Game {
 
   // ADD NEW ENEMIES
   addNewEnemiesLeft = () => {
-    let randomPosY = Math.random() * 600;  
+    let randomPosY = Math.random() * 600;
     let newEnemieLeft = new Enemy(0, randomPosY, 2, "./images/freezer.png");
-  
-  
+
     if (
       this.enemyArr.length < 3 ||
       this.enemyArr[this.enemyArr.length - 3].x > canvas.width * 0.3
@@ -224,7 +228,7 @@ class Game {
     let newRandomPosY = Math.random() * 600;
     let newEnemieRight;
     if (this.level === 0) {
-     newEnemieRight = new Enemy(
+      newEnemieRight = new Enemy(
         canvas.width,
         newRandomPosY,
         -2,
@@ -251,32 +255,27 @@ class Game {
   addNewEnemiesPlus = () => {
     let newRandomPosX = Math.random() * 600;
     let newEnemiePlus;
-    
+
     if (this.level === 0) {
-      newEnemiePlus = new EnemyPlus(
-        newRandomPosX,
-        0,
-        2,
-        "./images/cooler.png"
-      )
-     }
-     if (this.level === 1) {
+      newEnemiePlus = new EnemyPlus(newRandomPosX, 0, 2, "./images/cooler.png");
+    }
+    if (this.level === 1) {
       newEnemiePlus = new EnemyPlus(
         newRandomPosX,
         0,
         1.4,
         "./images/cooler.png"
-      )
-     } 
-    
-    setInterval(() => {
+      );
+    }
+
+    if(this.time > 10) {
       if (
         this.enemyPlusArr.length < 2 ||
         this.enemyPlusArr[this.enemyPlusArr.length - 2].y > canvas.height
       ) {
         this.enemyPlusArr.push(newEnemiePlus);
       }
-    }, 4000);
+    }
   };
   // PROJECTILE COLLISION
   projectileCollisionEnemyLeft = () => {
@@ -487,7 +486,7 @@ class Game {
   addNewBrolyProjectiles = () => {
     let randomVX = (Math.random() - 1.5) * 2.2;
     let randomVY = (Math.random() - 0.5) * 2.2;
-    setTimeout(() => {
+    if (this.time > 4.7) {
       let newBrolyProjectile = new BrolyProjectile(randomVX, randomVY);
       if (
         this.brolyProjectile.length < 4 ||
@@ -497,7 +496,7 @@ class Game {
         brolyKi.play();
         this.brolyProjectile.push(newBrolyProjectile);
       }
-    }, 5000);
+    }
   };
 
   brolyProjectileCollisionGoku = () => {
@@ -532,8 +531,9 @@ class Game {
         this.broly.h + this.broly.y > projectile.y
       ) {
         this.popParticles(this.broly, "#830707");
+        this.broly.hp = this.broly.hp - 2;
+        brolyHpBar.style.width = this.broly.hp + "%";
         this.gokuProjectile.splice(i, 1);
-        this.broly.hp--;
       }
     });
   };
@@ -549,16 +549,17 @@ class Game {
         this.popParticles(this.broly, "#830707");
         this.gokuKiProjectile.splice(i, 1);
         this.broly.hp = this.broly.hp - 20;
+        brolyHpBar.style.width = this.broly.hp + "%";
       }
     });
   };
 
   winner = () => {
-    if (this.broly.hp <= 0) {        
-      this.goku.image.src = "./images/gokuwin.png"
-      this.broly.image.src = "./images/Broly 42 (1).png"
+    if (this.broly.hp <= 0) {
+      this.goku.image.src = "./images/gokuwin.png";
+      this.broly.image.src = "./images/Broly 42 (1).png";
       setTimeout(() => {
-        this.isGameOn = false;      
+        this.isGameOn = false;
       }, 500);
       setTimeout(() => {
         canvas.style.display = "none";

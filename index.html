@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles/style.css" />
-    <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="./images/favicon.ico" />
     <title>DRAGON BALL HORDE</title>
   </head>
   <body>
@@ -23,7 +23,7 @@
           <li><button id="options-btn" class="btn">OPTIONS</button></li>
         </ul>
       </div>
-
+      <!-- INSTRUCTION SCREEN -->
       <div id="instructions-screen">
         <ul>
           <li>
@@ -54,7 +54,7 @@
           <li><button class="btn back-btn">BACK TO MENU</button></li>
         </ul>
       </div>
-
+      <!-- OPTIONS SCREEN -->
       <div id="options-screen">
         <h1>GAME SOUND IS INSANE</h1>
         <h2>DONT MUTE IT!</h2>
@@ -63,6 +63,11 @@
       </div>
       <!-- GAME SCREEN -->
       <div class="characterUI">
+        <div id="#broly">
+          <div id="broly-hp">
+            <div id="broly-hp-bar"></div>
+          </div>
+        </div>
         <div class="ki-health">
           <div class="health">
             <div class="healthbar"></div>
@@ -76,39 +81,40 @@
             <h1>5</h1>
           </div>
         </div>
+        <!-- SCORE -->
         <div class="score">
           <img src="./images/SCORE1.png" alt="SCORE" /><span>0</span>
         </div>
         <canvas id="canvas" width="800" height="600"></canvas>
       </div>
+      <!-- interlude screen -->
       <div id="interlude">
         <h1>Oh oh... seems someone is approaching us...</h1>
         <h1>Try to survive as you can!</h1>
         <button id="interlude-btn" class="btn">Continue...</button>
       </div>
-
+      <!-- Broly HP BAR -->
+      
+      <!-- WINNER SCREEN -->
       <div id="winner-screen">
         <h1>Congrats! You WIN!</h1>
-        <img src="./images/gokuwin.png" alt="">
+        <img src="./images/gokuwin.png" alt="" />
         <h3>Anyway... be careful...</h3>
-        <h3>HORDE OF ENEMIES IS COMMING</h3>        
+        <h3>HORDE OF ENEMIES IS COMMING</h3>
         <button class="btn back-btn">BACK TO MENU</button>
       </div>
       <!-- FINISH SCREEN -->
       <div id="gameover-screen">
         <h1>GAME OVER</h1>
         <h3>RANKING!</h3>
-        <ol id="score-ranking">
-          
-        </ol>
+        <ol id="score-ranking"></ol>
         <div id="gameover-btns">
-          <button id="playagain" class="btn">PLAY AGAIN!</button>         
-          <button class="btn back-btn" >BACK TO MENU</button>
+          <button id="playagain" class="btn">PLAY AGAIN!</button>
+          <button class="btn back-btn">BACK TO MENU</button>
         </div>
       </div>
     </div>
 
-    
     <!--SCRIPTS HERE, DONT TOUCH THIS-->
     <script src="./javascript/main.js"></script>
     <script src="./javascript/game.js"></script>

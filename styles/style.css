@@ -270,7 +270,6 @@ h2 {
 h3 {
   color: #910232;
   text-shadow: 1px 1px black;
-  
 }
 
 #gameover-screen h3 {
@@ -297,7 +296,7 @@ h3 {
   content: "  «";
 }
 
-#gameover-btns{
+#gameover-btns {
   display: flex;
   justify-content: space-around;
   width: 350px;
@@ -326,6 +325,39 @@ h3 {
   color: #910232;
 }
 
+
+#broly-hp {
+  display: none;
+  position: absolute;
+  width: 50px;
+  height: 17px;
+  border: 2px solid black;
+  margin-top: 10px;
+  margin-left: 10px;
+  border-radius: 2px;
+  box-sizing: border-box;
+  bottom: 52%;
+  left: 87%;
+  opacity: 1;
+  animation: appear 6s ease-in-out;
+}
+
+#broly-hp-bar {
+  background: rgb(255, 0, 0);
+  background: linear-gradient(
+    90deg,
+    w rgba(255, 0, 0, 1) 0%,
+    rgba(122, 37, 37, 1) 0%,
+    rgba(255, 0, 0, 0.7931547619047619) 42%
+  );
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  position: absolute;
+}
+
 #winner-screen {
   display: none;
   flex-direction: column;
@@ -344,7 +376,8 @@ h3 {
   animation: move 4s ease-in-out;
 }
 
-#winner-screen h1,h3 {
+#winner-screen h1,
+h3 {
   color: #910232;
   text-shadow: 1px 1px black;
 }
@@ -359,3 +392,14 @@ h3 {
   }
 }
 
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  70% {
+    opacity: 0;
+  }
+  80% {
+    opacity: 1;
+  }
+}
