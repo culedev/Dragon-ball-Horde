@@ -16,7 +16,7 @@ Are you ready to save the world? It's time to defeat freezer & cooler! And... wh
 - Special attack available!
 - Recover HP every 50 points!
 - Smooth movement!
-- Goku approves of this game!
+- Goku approves this game!
 
 # Backlog Functionalities
 
@@ -26,6 +26,7 @@ Are you ready to save the world? It's time to defeat freezer & cooler! And... wh
 - Cool animations and transitions!
 - HP Bar + Ki Bar!
 - Good for 60hz, 120hz and 144hz!
+- And of course... Goku approves this game!
 
 # Proyect Structure
 
