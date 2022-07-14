@@ -1,6 +1,6 @@
-# DRAGON HORDE
+# DRAGON BALL HORDE
 
-## [See the Game](https://culedev.github.io/game-project/)
+## [Dragon Ball Horde](https://culedev.github.io/Dragon-ball-Horde/)
 
 # Description
 
@@ -8,11 +8,24 @@ Are you ready to save the world? It's time to defeat freezer & cooler! And... wh
 
 # Main Functionalities
 
-- List here the main functionalities your game will have
+- 2 different Gameplays:
+    Campaign Mode (Difficult: Easy)
+    Horde Mode (Difficult: Hard)
+- Ranking Score (using LocalStorage)!
+- Shoot where you are aiming!
+- Special attack available!
+- Recover HP every 50 points!
+- Smooth movement!
+- Goku approves of this game!
 
 # Backlog Functionalities
 
-- List here the cool (but not essential) functionalities your game could have
+- Particles when you defeat each enemy!
+- Really good Soundtrack!
+- Mute button for those who are DB haters... 
+- Cool animations and transitions!
+- HP Bar + Ki Bar!
+- Good for 60hz, 120hz and 144hz!
 
 # Proyect Structure
 
