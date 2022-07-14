@@ -107,7 +107,7 @@ class Game {
 
       if (Number(score.innerHTML) >= 30) {
         this.isGameOn = false;
-        
+
         setTimeout(() => {
           canvas.style.display = "none";
           UI.style.display = "none";
@@ -268,7 +268,7 @@ class Game {
       );
     }
 
-    if(this.time > 10) {
+    if (this.time > 10) {
       if (
         this.enemyPlusArr.length < 2 ||
         this.enemyPlusArr[this.enemyPlusArr.length - 2].y > canvas.height
@@ -558,6 +558,7 @@ class Game {
     if (this.broly.hp <= 0) {
       this.goku.image.src = "./images/gokuwin.png";
       this.broly.image.src = "./images/Broly 42 (1).png";
+      deathBroly.play()
       setTimeout(() => {
         this.isGameOn = false;
       }, 500);

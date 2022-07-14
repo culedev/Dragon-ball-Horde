@@ -9,7 +9,7 @@ class Goku {
     this.hp = 100;
     this.ki = 0;
     this.image = new Image();
-    this.image.src;
+    this.image.src = "./images/gokuIddle.png"
     this.alive = true;
   }
 
