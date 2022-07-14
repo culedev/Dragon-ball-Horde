@@ -303,11 +303,6 @@ canvas.addEventListener("click", (event) => {
     game.goku.image.src = "./images/gokuposseattack2left.png";
   }
 
-  // if (random === 1 && deltaX < 0) {
-  //   game.goku.image.src = "./images/gokuposseattack1left.png"
-  // } else if (random === 0 && deltax < 0) {
-  //   game.goku.image.src = "./images/gokuposseattack2left.png"
-  // }
   game.gokuProjectile.push(newProjectile);
 });
 // charges KI
@@ -318,7 +313,7 @@ window.addEventListener("keydown", ({ keyCode }) => {
     game.goku.vy = 0;
     game.goku.vx = 0;
 
-    game.goku.ki = game.goku.ki + 2;
+    game.goku.ki = game.goku.ki + 3;
     gokuKi.style.width = game.goku.ki + "%";
   }
 });
