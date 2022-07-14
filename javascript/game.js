@@ -104,34 +104,8 @@ class Game {
       this.KiCollisionEnemyPlus();
       this.gokuEnemyRightCollision();
       this.gokuEnemyPlusCollision();
-
-      if (Number(score.innerHTML) >= 30) {
-        this.isGameOn = false;
-        setTimeout(() => {
-          let fadeEffect = setInterval(() => {
-            if (!canvas.style.opacity) {
-              canvas.style.opacity = 1;
-              UI.style.opacity = 1;
-            }
-            if (canvas.style.opacity > 0) {
-              canvas.style.opacity -= 0.02;
-              UI.style.opacity -= 0.02;
-            } else {
-              clearInterval(fadeEffect);            
-            }
-          }, 50);
-        }, 0.5);
-        setTimeout(() => {
-          canvas.style.display = "none";
-          UI.style.display = "none"
-          interludeScreen.style.display = "flex";
-          destructionAudio.play();
-          canvas.style.opacity = 1;
-          UI.style.opacity = 1;
-        }, 5000);
-        combatAudio.pause();
-        evilLaugh.play();
-      }
+      this.interludeTransition();
+      
     }
     //* LEVEL 2
     if (this.level === 2) {
@@ -496,7 +470,7 @@ class Game {
     }
   };
 
-  //* Broly methods
+  //* Broly 
   addNewBrolyProjectiles = () => {
     let randomVX = (Math.random() - 1.5) * 2.2;
     let randomVY = (Math.random() - 0.5) * 2.2;
@@ -568,6 +542,36 @@ class Game {
     });
   };
 
+  interludeTransition = () => {
+    if (Number(score.innerHTML) >= 30) {
+      this.isGameOn = false;
+      setTimeout(() => {
+        let fadeEffect = setInterval(() => {
+          if (!canvas.style.opacity) {
+            canvas.style.opacity = 1;
+            UI.style.opacity = 1;
+          }
+          if (canvas.style.opacity > 0) {
+            canvas.style.opacity -= 0.02;
+            UI.style.opacity -= 0.02;
+          } else {
+            clearInterval(fadeEffect);            
+          }
+        }, 50);
+      }, 0.5);
+      setTimeout(() => {
+        canvas.style.display = "none";
+        UI.style.display = "none"
+        interludeScreen.style.display = "flex";
+        destructionAudio.play();
+        canvas.style.opacity = 1;
+        UI.style.opacity = 1;
+      }, 5000);
+      combatAudio.pause();
+      evilLaugh.play();
+    }
+  }
+
   winner = () => {
     if (this.broly.hp <= 0) {
       this.goku.image.src = "./images/gokuwin.png";
@@ -601,4 +605,6 @@ class Game {
       finalAudio.play();
     }
   };
+
+  
 }
