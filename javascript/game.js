@@ -107,12 +107,27 @@ class Game {
 
       if (Number(score.innerHTML) >= 30) {
         this.isGameOn = false;
-
+        setTimeout(() => {
+          let fadeEffect = setInterval(() => {
+            if (!canvas.style.opacity) {
+              canvas.style.opacity = 1;
+              UI.style.opacity = 1;
+            }
+            if (canvas.style.opacity > 0) {
+              canvas.style.opacity -= 0.02;
+              UI.style.opacity -= 0.02;
+            } else {
+              clearInterval(fadeEffect);            
+            }
+          }, 50);
+        }, 0.5);
         setTimeout(() => {
           canvas.style.display = "none";
-          UI.style.display = "none";
+          UI.style.display = "none"
           interludeScreen.style.display = "flex";
           destructionAudio.play();
+          canvas.style.opacity = 1;
+          UI.style.opacity = 1;
         }, 5000);
         combatAudio.pause();
         evilLaugh.play();
@@ -141,7 +156,6 @@ class Game {
       this.brolyProjectile.forEach((projectile) => {
         projectile.updateProjectile();
       });
-      brolyHp.classList.add("brolyhp");
       this.winner();
     }
     // forEach PROJECTILE
@@ -558,14 +572,30 @@ class Game {
     if (this.broly.hp <= 0) {
       this.goku.image.src = "./images/gokuwin.png";
       this.broly.image.src = "./images/Broly 42 (1).png";
-      deathBroly.play()
+      deathBroly.play();
+      setTimeout(() => {
+        let fadeEffect = setInterval(() => {
+          if (!canvas.style.opacity) {
+            canvas.style.opacity = 1;
+            UI.style.opacity = 1;
+          }
+          if (canvas.style.opacity > 0) {
+            canvas.style.opacity -= 0.02;
+            UI.style.opacity -= 0.02;
+          } else {
+            clearInterval(fadeEffect);            
+          }
+        }, 500);
+      }, 1000);
       setTimeout(() => {
         this.isGameOn = false;
       }, 500);
       setTimeout(() => {
-        canvas.style.display = "none";
-        UI.style.display = "none";
+        canvas.style.display = "none";    
+        UI.style.display = "none"; 
         winnerScreen.style.display = "flex";
+        canvas.style.opacity = 1;
+        UI.style.opacity = 1
       }, 3000);
       combatAudio.pause();
       finalAudio.play();
