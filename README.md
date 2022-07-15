@@ -32,11 +32,34 @@ Are you ready to save the world? It's time to defeat freezer & cooler! And... wh
 
 ## main.js
 
+- CANVAS CONF
+- GLOBAL VARIABLES
+- AUDIOS
+- DOM ELEMENTS
+- STATE MANAGEMENT FUNCTIONS
+- ADDEVENTLISTENERS
+
 ## game.js
+
+- CLASS GAME
+- SYNC FPS / HZ
+- GAMELOOP
+- GAME METHODS
 
 ## player.js 
 
+- CLASS GOKU
+- CLASS GOKU PROJECTILES (Normal attack)
+- CLASS GOKU KI PROJECTILES (Special Attack)
+- CLASS PARTICLE 
+
 ## enemies.js
 
+- CLASS ENEMY (Freezer character)
+- CLASS ENEMY PLUS (Cooler character)
+
 ## finalBoss.js
+
+- CLASS BROLY
+- CLASS BROLY PROJECTILE
 
